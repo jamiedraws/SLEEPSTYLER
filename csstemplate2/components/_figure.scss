@@ -1,0 +1,51 @@
+@use "../components/contain";
+@use "../layouts/group";
+@use "../layouts/queries";
+
+$select: ".figure" !default;
+
+@mixin new($width: 350px) {
+    @include group.new($select, 0.5rem) {
+        &__item {
+            flex: 0 1 $width;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+    #{$select} {
+        text-align: center;
+
+        picture {
+            max-width: $width;
+        }
+
+        figcaption {
+            margin: 2rem 0;
+        }
+
+        &__frame {
+            border: 1px solid;
+        }
+
+        @content;
+    }
+}
+
+@mixin fill {
+    #{$select} {
+        @media (min-width: queries.$md) {
+            &--fill {
+                #{$select}__item {
+                    flex: 1 1 33%;
+                    margin: 0;
+                    picture {
+                        max-width: none;
+                        border: none;
+                    }
+                }
+            }
+        }
+        @content;
+    }
+}

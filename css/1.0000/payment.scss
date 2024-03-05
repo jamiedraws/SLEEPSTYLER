@@ -1,0 +1,9 @@
+@use "../interfaces/ui-page";
+@use "../interfaces/ui-payment";
+@use "../interfaces/ui-checkout";
+
+.view {
+    &--main {
+        background: url(/images/desktop/bg_splash--backend.jpg) no-repeat center bottom;
+    }
+}

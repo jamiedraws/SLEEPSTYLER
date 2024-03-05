@@ -1,0 +1,235 @@
+@use "Shared/css/template/dtm/components/button";
+@use "Shared/css/template/dtm/components/expando";
+@use "../themes/colors";
+@use "../themes/fonts";
+
+$select: ".btn" !default;
+$breakpoint: 1000px !default;
+
+@mixin new {
+    @include button.model($select) {
+        @include color(colors.$first, colors.$light);
+        font-family: fonts.$fourth, sans-serif;
+        font-size: 2rem;
+        padding: 0.5em 0.75em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 2px solid colors.$first;
+        border-radius: 0.25em;
+        color: colors.$light;
+        overflow: hidden;
+
+        &::after {
+            transform: skew(45deg) scaleX(0);
+            transform-origin: left bottom;
+            transition: transform 0.4s ease-out;
+            opacity: 1;
+        }
+
+        &:focus {
+            outline-color: colors.$first;
+            // doing this to prevent that small white inset border
+            outline-offset: -1px;
+        }
+
+        &:hover,
+        &:focus,
+        &--is-active {
+            color: colors.$first;
+            @include expando.icon(colors.$first);
+        }
+
+        &:hover,
+        &:focus,
+        &--is-active {
+            &::after {
+                transform: skew(45deg) scaleX(2);
+            }
+        }
+
+        &--is-disabled {
+            pointer-events: none;
+        }
+
+        &--cart {
+            border-radius: 0;
+        }
+
+        @media all and (max-width: $breakpoint) {
+            font-size: 2rem;
+        }
+
+        @content;
+    }
+}
+
+@mixin color($before-color: black, $after-color: black) {
+    &::before {
+        background: $before-color;
+    }
+
+    &::after {
+        background: $after-color;
+    }
+}
+
+@mixin order {
+    #{$select} {
+        $color: colors.$first;
+
+        &--order {
+            border-color: $color;
+            background: $color;
+
+            @include color($color, white);
+
+            &:focus {
+                outline-color: $color;
+            }
+
+            &:hover,
+            &:focus {
+                color: $color;
+            }
+
+            &#{$select}--is-active {
+                $color: #55a10b;
+                border-color: $color;
+                color: $color;
+
+                &:focus {
+                    outline-color: $color;
+                }
+            }
+        }
+
+        &--order-contrast {
+            border-color: white;
+            color: $color;
+
+            @include color(white, $color);
+            &:hover,
+            &:focus,
+            &#{$select}--is-active {
+                color: white;
+            }
+            &:focus {
+                outline-color: $color;
+            }
+        }
+    }
+}
+
+@mixin media {
+    #{$select} {
+        $color: colors.$third;
+        $text-color: colors.$second;
+
+        &--media {
+            border-color: $text-color;
+            color: $text-color;
+
+            font-size: 1.8rem;
+
+            @include color($color, white);
+
+            &:focus {
+                outline-color: $color;
+            }
+
+            &:hover,
+            &:focus {
+                color: $text-color;
+            }
+
+            &#{$select}--is-active {
+                $color: #55a10b;
+                border-color: $color;
+                color: $color;
+
+                &:focus {
+                    outline-color: $color;
+                }
+            }
+        }
+
+        &--media-contrast {
+            border-color: white;
+            color: $color;
+
+            @include color(white, $color);
+            &:hover,
+            &:focus,
+            &#{$select}--is-active {
+                color: white;
+            }
+            &:focus {
+                outline-color: $color;
+            }
+        }
+    }
+}
+
+@mixin namebar {
+    #{$select} {
+        $this: &;
+
+        &--namebar {
+            border-color: colors.$first;
+            color: colors.$first;
+
+            @include color(white, colors.$first);
+
+            &:hover,
+            &:focus {
+                color: colors.$first;
+
+                &::after {
+                    opacity: 0;
+                }
+            }
+
+            &#{$select}--sold-out {
+                border-color: #c6c6c6;
+                justify-content: center;
+                &::before,
+                &::after {
+                    background: #c6c6c6;
+                }
+                .sold-out {
+                    color: #ff0000;
+                }
+            }
+
+            &#{$select}--is-active {
+                color: white;
+
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+@mixin bigger {
+    #{$select} {
+        &--is-bigger {
+            font-size: 2rem;
+
+            @media all and (min-width: $breakpoint) {
+                font-size: 3rem;
+            }
+        }
+    }
+}
+
+@mixin hero {
+    #{$select} {
+        &--hero {
+            @media all and (max-width: $breakpoint) {
+                font-size: 2rem;
+            }
+        }
+    }
+}

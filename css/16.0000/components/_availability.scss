@@ -1,0 +1,29 @@
+/**
+* @prettier
+*/
+
+$select: ".availability" !default;
+$color-backorder: #c00;
+$color-instock: #38a309;
+
+@mixin new {
+	#{$select} {
+		margin: 1rem;
+		font-size: 13.5px;
+
+		em {
+			font-style: normal;
+			font-weight: bold;
+		}
+
+		&--backorder em {
+			color: $color-backorder;
+		}
+
+		&--instock em {
+			color: $color-instock;
+		}
+
+		@content;
+	}
+}

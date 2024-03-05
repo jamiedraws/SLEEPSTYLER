@@ -1,0 +1,71 @@
+@use "Shared/css/template/dtm/utils/scope";
+@use "../components/contain";
+
+$select: ".affirm" !default;
+
+@mixin new {
+    #{$select} {
+        &__link {
+            cursor: pointer;
+        }
+
+        & &__logo-inline {
+            @include contain.container;
+            @include contain.ratio(50/20);
+            display: inline-block;
+            max-width: 3.25em;
+            margin: 0 0.2em;
+        }
+
+        //show the video per task recent task log
+        &__video {
+            //display: none;
+            opacity: 1 !important;
+            pointer-events: all !important;
+        }
+        
+        > span:first-of-type {
+            display: block;
+        }
+
+        > a {
+            margin: 0 0.15em;
+        }
+
+        @content;
+    }
+}
+
+@mixin hero {
+    #{$select} {
+        &--hero {
+            width: 100%;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 1rem;
+
+            @content;
+        }
+    }
+}
+
+@mixin checkout {
+    #{$select} {
+        &__logo-inline {
+            img {
+                border: none;
+            }
+        }
+    }
+
+    #{$select} {
+        &-checkout {
+            &--is-hidden {
+                display: none;
+            }
+
+            @content;
+        }
+    }
+}

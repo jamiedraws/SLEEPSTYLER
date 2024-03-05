@@ -1,0 +1,38 @@
+@use "../themes/colors";
+@use "../themes/fonts";
+
+$select: ".namebar" !default;
+
+@mixin new {
+    #{$select} {
+        background: colors.$first;
+        color: colors.$light;
+        padding: 0.6rem 0.25rem;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font: italic 2em fonts.$first, sans-serif;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        .prime-mark {
+            margin: -0.1em 0 0.15em 0;
+            display: inline-block;
+        }
+
+        @media all and (max-width: 1000px) {
+            > span,
+            > svg {
+                margin: 0.5em;
+            }
+        }
+
+        &--active {
+            background: colors.$light;
+            color: colors.$first;
+        }
+
+        @content;
+    }
+}

@@ -1,0 +1,32 @@
+@mixin ui {
+    .reveal {
+        position: relative;
+        overflow: hidden;
+        padding: 0.25em 0;
+
+        &__item {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        &__in {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+
+        &--is-visible {
+            .reveal {
+                &__in {
+                    opacity: 1;
+                    transform: translate(0);
+                }
+
+                &__out {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+            }
+        }
+    }
+
+    @content;
+}

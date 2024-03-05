@@ -1,0 +1,155 @@
+@use "../../Shared/css/template/dtm/utils/center-absolute" as position;
+@use "../themes/colors";
+
+$select: ".media" !default;
+$breakpoint: 1100px !default;
+
+@use "../layouts/group";
+
+@mixin new {
+    #{$select} {
+        &__in {
+            max-width: none;
+            contain: none;
+        }
+
+        &__header {
+            background: white;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 3rem;
+
+            @media all and (min-width: $breakpoint) {
+                box-shadow: 0 3em 3em 3em white;
+            }
+        }
+
+        &__body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        &__content {
+            flex: 0 1 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__overlay {
+            @media all and (min-width: $breakpoint) {
+                position: relative;
+                z-index: 1;
+                min-height: 520px;
+            }
+        }
+
+        &__underlay {
+            @media all and (min-width: $breakpoint) {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+
+            @media all and (max-width: $breakpoint) {
+                order: 1;
+                flex: 1 1 100%;
+            }
+        }
+
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            @include group.gutter(2rem);
+            margin: 0;
+            flex: 1 1 100%;
+        }
+
+        &__player {
+            flex: 0 1 640px;
+
+            nav {
+                display: flex;
+                margin-top: 0.5rem;
+            }
+
+            @media all and (max-width: $breakpoint) {
+                flex-grow: 1;
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        &__btn {
+            flex: 1 1 7em;
+            padding: 0.75em 0.25em;
+        }
+
+        &__title {
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            text-align: center;
+            text-shadow: 0 0.1em 0.25em black;
+            font-style: italic;
+            line-height: 1.1;
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 0.5em 1em;
+
+            > * {
+                display: block;
+                word-break: break-word;
+            }
+        }
+
+        &__psi {
+            color: white;
+            text-shadow: 0 0 1em black, 0 0 0.75em black, 0 0 0.5em black;
+            margin-top: auto;
+
+            picture {
+                max-width: 200px;
+            }
+
+            figcaption {
+                margin-top: 1rem;
+
+                > span {
+                    display: block;
+                }
+            }
+
+            @media all and (max-width: $breakpoint) {
+                position: absolute;
+                font-size: 1rem;
+                z-index: 2;
+                bottom: 2rem;
+            }
+        }
+
+        @include mobile;
+
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media all and (max-width: $breakpoint) {
+        #{$select} {
+            &__content {
+                background: #666;
+                margin: 0 -1rem;
+                overflow: hidden;
+            }
+
+            &__title {
+                font-size: 2.3rem;
+            }
+        }
+    }
+}

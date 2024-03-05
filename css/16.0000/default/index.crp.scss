@@ -1,0 +1,4 @@
+@use "../interfaces/app";
+
+@include app.index(true);
+@include app.index(false);

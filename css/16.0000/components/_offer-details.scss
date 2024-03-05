@@ -1,0 +1,12 @@
+$select: ".offer-details" !default;
+
+@mixin new {
+	#{$select} {
+		border: 1px solid #ccc;
+		padding: 2rem;
+		max-width: 900px;
+		margin: 2rem auto;
+
+		@content;
+	}
+}

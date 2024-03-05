@@ -1,0 +1,110 @@
+@use "../../../Shared/css/template/dtm/utils/scope";
+@use "../../interfaces/ui-promo-banner";
+@use "../../models/colors";
+@use "../../models/fonts";
+
+@include scope.for-desktop {
+    .view__anchor {
+        top: -95px;
+    }
+
+    .hero {
+        &__burst {
+            margin-top: 0;
+        }
+    }
+}
+
+.offer {
+    &__is-discount-of {
+        display: inline-flex;
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: .1em;
+            background: #6f6d6c;
+            transform-origin: center;
+            transform: rotate(-0.2rad);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    }
+}
+
+.deal {
+    &--header {
+        display: flex;
+        flex-wrap: wrap;
+        background: colors.get(fourth);
+
+        .offer {
+            color: white;
+            display: flex;
+            align-items: center;
+            @include fonts.fourth(1.2em);
+
+            &__txt {
+                margin: 0 0.5em;
+                text-transform: uppercase;
+            }
+
+            &__is-discount-of {
+                order: -1;
+
+                &::after {
+                    background: black;
+                }
+            }
+
+            &__price {
+                font-size: inherit;
+            }
+        }
+    }
+
+    &--header &__banner {
+        display: flex;
+        align-items: center;
+        text-align: left;
+
+        &:focus,
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &--hero {
+        .offer {
+            &__is-discount-of {
+                color: #a6a6a6;
+                font-size: 2.5em;
+            }
+
+            &__is-discount-of + &__price {
+                margin-top: 0;
+            }
+
+            &__price {
+              margin-bottom: .5em;
+            }
+
+            &__is-discount-of {
+                display: none;
+            }
+        }
+    }
+}
+
+@include scope.for-desktop {
+    .deal {
+        &--header {
+            justify-content: center;
+        }
+    }
+}

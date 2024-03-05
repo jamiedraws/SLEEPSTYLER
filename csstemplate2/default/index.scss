@@ -1,0 +1,6 @@
+@use "../interfaces/app";
+@use "../components/banner";
+
+@include app.index(false) {
+	@include banner.new;
+} ;

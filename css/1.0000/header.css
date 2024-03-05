@@ -1,0 +1,46 @@
+.header {
+  font-size: 1rem;
+}
+.header__group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.header__logo {
+  display: flex;
+  align-items: center;
+  mix-blend-mode: multiply;
+}
+
+.title {
+  font: 4.5em/0.9 futura-pt-bold, sans-serif;
+  font-style: italic;
+  text-align: center;
+  text-transform: uppercase;
+  color: #333333;
+}
+.title > span {
+  display: block;
+}
+
+@media all and (max-width: 1100px) {
+  .dtm__in--dv .header {
+    display: none;
+  }
+}
+.dtm__in--dv .header__logo {
+  flex: 0 0 47em;
+}
+
+.dtm__in--mv .header {
+  font-size: 0.4em;
+}
+.dtm__in--mv .header__logo {
+  flex: 0 1 10em;
+}
+.dtm__in--mv .header__title {
+  text-align: left;
+}
+
+/*# sourceMappingURL=header.css.map */

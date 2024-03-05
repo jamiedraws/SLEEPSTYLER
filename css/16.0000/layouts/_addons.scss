@@ -1,0 +1,132 @@
+$select: ".addons" !default;
+$breakpoint: 1000px !default;
+
+@use "../layouts/group";
+@use "Shared/css/template/dtm/utils/text";
+
+@mixin new {
+    #{$select} {
+        font-size: 1.3rem;
+        font-weight: 600;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+
+        &__section {
+            flex: 1 1 250px;
+        }
+
+        &__group {
+            text-align: center;
+            align-items: center;
+            max-width: 88vw;
+            margin: auto;
+        }
+
+        &__item {
+            flex-direction: column;
+
+            picture {
+                margin: auto;
+                flex: 1 1 auto;
+            }
+
+            figcaption {
+                width: auto;
+                margin: 0.5em;
+                @include text.wrap;
+            }
+
+            a {
+                display: block;
+                font-size: 80%;
+            }
+
+            &--trigger-gun {
+                position: relative;
+                figcaption {
+                    position: absolute;
+                    left: 7em;
+                    bottom: 0;
+                    z-index: 2;
+                }
+            }
+
+        }
+
+        @media all and (min-width: $breakpoint) {
+            &__group {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            &__item {
+                flex: 1 1 auto;
+                &--trigger-gun {
+                    flex-basis: 100%;
+                }
+    
+                &--tanks,
+                &--tips {
+                    flex-basis: 50%;
+                }
+    
+                &--hose-adapter {
+                    flex-grow: 0;
+                }
+            }
+        }
+
+        &__bag {
+            flex: 1 1 100%;
+        }
+
+        &__bonus {
+            margin-top: 2em;
+            margin-bottom: 2em;
+        }
+
+        // this is to reduce font size and pack in more items
+        &--extra {
+            font-size: 1.1rem;
+            #{$select}__item {
+                flex-basis: 9em;
+                margin: 0;
+                align-self: center;
+                flex-grow: 0.7;
+            }
+        }
+    }
+
+    @media all and (min-width: $breakpoint) {
+        @include grid;
+    }
+
+    @media all and (max-width: $breakpoint) {
+        #{$select} {
+            // &__item {
+            //     min-width: 11em;
+            // }
+            &--item {
+                > * {
+                    flex-basis: auto;
+                }
+            }
+        }
+    }
+}
+
+@mixin grid {
+    #{$select} {
+        &__group {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            flex-wrap: wrap;
+            @include group.gutter;
+        }
+
+        &__nav {
+            display: none;
+        }
+    }
+}

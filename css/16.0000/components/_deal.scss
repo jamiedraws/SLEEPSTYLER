@@ -1,0 +1,171 @@
+@use "../themes/colors";
+@use "../themes/fonts";
+
+@use "../layouts/group";
+@use "../components/burst" with (
+    $color-primary: #a8a9aa
+);
+@use "../components/divider-line";
+@use "Shared/css/template/dtm/components/banner";
+
+$select: ".deal" !default;
+$breakpoint: 400px !default;
+$breakpoint-divider: 350px !default;
+
+@mixin new {
+	@include divider-line.new;
+	@include banner.model("#{$select}__banner") {
+		text-transform: uppercase;
+		font-size: 1.5rem;
+		font-weight: 900;
+		margin: 0 0 1rem;
+	}
+
+	#{$select} {
+		&__group {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+
+		&__item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 0.25em;
+			@include group.gutter;
+			margin: 0;
+		}
+
+		&__offer {
+			font-family: fonts.$fifth, sans-serif;
+			font-weight: 900;
+			display: flex;
+			flex-direction: column;
+		}
+
+		&__separate {
+			color: burst.$color-primary;
+
+			@media all and (min-width: $breakpoint-divider) {
+				@include divider-line.column;
+				flex: 1 1 auto;
+			}
+
+			@media all and (max-width: $breakpoint-divider) {
+				@include divider-line.row;
+			}
+		}
+
+		&__burst {
+			@include burst.new;
+			font-family: fonts.$first;
+		}
+
+		&__order {
+			margin-top: auto;
+		}
+	}
+}
+
+@mixin navdrawer {
+	#{$select} {
+		&--navdrawer {
+			@media all and (max-width: $breakpoint) {
+				display: none;
+			}
+
+			#{$select} {
+				&__burst {
+					font-size: 2em;
+				}
+			}
+
+			@content;
+		}
+	}
+}
+
+@mixin navbar {
+	#{$select} {
+		&--navbar {
+			#{$select} {
+				&__offer {
+					font-size: 0.5rem;
+				}
+
+				&__item {
+					flex-direction: row;
+					flex-wrap: wrap;
+				}
+
+				&__btn {
+					font-size: 1em;
+				}
+
+				&__separate {
+					display: none;
+				}
+			}
+
+			@content;
+		}
+	}
+}
+
+@mixin nav {
+	#{$select} {
+		&--nav {
+			@content;
+		}
+	}
+}
+
+@mixin hero {
+	#{$select} {
+		&--hero {
+			#{$select} {
+				&__offer {
+					font-size: 0.9rem;
+
+					@media all and (max-width: $breakpoint) {
+						font-size: 0.75em;
+					}
+				}
+
+				&__item {
+					padding: 0;
+				}
+
+				&__separate {
+					font-size: 0.75em;
+					margin: 0.25em;
+				}
+			}
+
+			@content;
+		}
+	}
+}
+
+@mixin affirm {
+	#{$select} {
+		&--nav {
+			#{$select} {
+				&__affirm {
+					display: none;
+				}
+			}
+		}
+
+		&--hero {
+			#{$select} {
+				&__affirm {
+					margin-bottom: 1rem;
+					font-size: 1.6em;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}

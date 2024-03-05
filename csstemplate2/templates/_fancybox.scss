@@ -1,0 +1,21 @@
+/**
+* @prettier
+*/
+
+$select: ".fancybox" !default;
+
+@mixin new {
+	#{$select} {
+		&-stage {
+			[class*="button"] {
+				border: 0;
+			}
+		}
+
+		&-content {
+			max-width: 900px;
+		}
+
+		@content;
+	}
+}

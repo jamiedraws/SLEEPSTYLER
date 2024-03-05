@@ -1,0 +1,109 @@
+$select: ".header" !default;
+$breakpoint: 1000px !default;
+
+@use "../themes/colors";
+@use "../themes/fonts";
+@use "../layouts/queries";
+
+@use "../layouts/nav" with (
+	$background-color-alternative: #fafafa,
+	$breakpoint: queries.$xl,
+    $background-color: white,
+    $font-color: colors.$dark
+);
+@use "../layouts/group";
+
+@use "../components/reveal";
+@use "../components/cart-total";
+@use "../components/logos" with (
+	$breakpoint: queries.$xl
+);
+
+@mixin new {
+	@include logos.new;
+	@include logos.header;
+	@include logos.nav;
+	@include logos.navbar;
+
+	#{$select} {
+		font-size: 1rem;
+
+		@supports (mix-blend-mode: multiply) {
+			background: colors.$header-background;
+
+			&__in {
+				@media all and (min-width: $breakpoint) {
+					background: url(/images/chevrons.svg) no-repeat 28em 1em;
+				}
+			}
+		}
+
+		&__in {
+			padding-top: 2rem;
+			padding-bottom: 2rem;
+			contain: style;
+		}
+
+		&__group {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		&__center {
+			justify-content: center;
+		}
+
+		&__title {
+			font-size: 4.5rem;
+
+			> span {
+				display: block;
+			}
+		}
+
+		@media all and (max-width: $breakpoint) {
+			display: none;
+		}
+
+		@content;
+	}
+}
+
+@mixin nav {
+	@include nav.new {
+		&__list {
+			font-family: fonts.$first, sans-serif;
+			font-weight: bold;
+		}
+
+		&__link--order {
+			color: colors.$first;
+		}
+	}
+	@include nav.bar {
+		@supports (mix-blend-mode: multiply) {
+			&__pane::before {
+				background: colors.$header-background;
+			}
+		}
+	}
+
+	@include nav.drawer {
+		#{nav.$select} {
+			&__pane &__title {
+				background: colors.$dark;
+				color: white;
+			}
+		}
+	}
+
+	// @include cart-total.new;
+	// @include reveal.new;
+	// @include nav.reveal;
+	@include nav.offer-group;
+}
+
+@mixin end-page {
+	@include nav.make-bar-static;
+}

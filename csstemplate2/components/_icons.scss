@@ -1,0 +1,19 @@
+$select: ".icon" !default;
+
+@mixin new {
+	.svg-symbols {
+		display: none;
+	}
+
+	#{$select} {
+		display: inline-block;
+		width: 1em;
+		height: 1em;
+		stroke-width: 0;
+		stroke: currentColor;
+		fill: currentColor;
+		pointer-events: none;
+
+		@content;
+	}
+}

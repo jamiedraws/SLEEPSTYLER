@@ -1,0 +1,22 @@
+$select: ".payment" !default;
+
+@mixin new {
+    #{$select} {
+        $gap: 2px;
+
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 -#{$gap};
+        }
+
+        &__item {
+            max-width: 35px;
+            flex: 0 0 35px;
+            margin: $gap;
+        }
+
+        @content;
+    }
+}

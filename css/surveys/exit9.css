@@ -1,0 +1,24 @@
+/* Error: This module was already loaded, so it can't be configured using "with".
+ *    ,--> Shared\css\template\base\components\_button.scss
+ * 4  | / @use "./../../dtm/components/button" with (
+ * 5  | |     $-default: $select
+ * 6  | | );
+ *    | '-^ new load
+ *    '
+ *    ,--> css\surveys\exit9.scss
+ * 11 |   @use "../../Shared/css/template/dtm/components/button" as dtm-button;
+ *    |   ==================================================================== original load
+ *    '
+ *   Shared\css\template\base\components\_button.scss 4:1  @use
+ *   css\surveys\exit9.scss 12:1                           root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: This module was already loaded, so it can't be configured using \"with\".\a    \250c \2500 \2500 > Shared\\css\\template\\base\\components\\_button.scss\a 4  \2502  \250c  @use \"./../../dtm/components/button\" with (\a 5  \2502  \2502      $-default: $select\a 6  \2502  \2502  );\a    \2502  \2514 \2500 ^ new load\a    \2575 \a    \250c \2500 \2500 > css\\surveys\\exit9.scss\a 11 \2502    @use \"../../Shared/css/template/dtm/components/button\" as dtm-button;\d\a    \2502    \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501  original load\a    \2575 \a   Shared\\css\\template\\base\\components\\_button.scss 4:1  @use\a   css\\surveys\\exit9.scss 12:1                           root stylesheet";
+}

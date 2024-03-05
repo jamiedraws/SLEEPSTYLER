@@ -1,0 +1,159 @@
+$select: ".addons" !default;
+$breakpoint: 1000px !default;
+
+@use "../layouts/group";
+@use "../../shared/css/template/dtm/utils/text";
+
+@mixin new {
+    #{$select} {
+        font-size: 1.3rem;
+        font-weight: 600;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+
+        &__section {
+            flex: 1 1 250px;
+        }
+
+        &__group {
+            text-align: center;
+            align-items: center;
+            max-width: 88vw;
+            margin: auto;
+        }
+
+        &__item {
+            flex-direction: column;
+
+            picture {
+                margin: auto;
+                flex: 1 1 auto;
+            }
+
+            figcaption {
+                width: auto;
+                margin: 0.5em;
+                @include text.wrap;
+            }
+
+            a {
+                display: block;
+                font-size: 80%;
+            }
+
+            &--turbo-nozzle {
+                picture {
+                    max-width: 68px;
+                }
+            }
+
+            &--detergent-foam-cannon {
+                picture {
+                    max-width: 68px;
+                }
+            }
+
+            &--spray-tips {
+                picture {
+                    max-width: 68px;
+                }
+
+                figcaption {
+                    width: auto;
+                }
+            }
+
+            &--hose {
+                picture {
+                    max-width: 110px;
+                }
+
+                figcaption {
+                    width: auto;
+                    text-transform: initial;
+                    @include text.wrap;
+                }
+            }
+
+            &--power-cord {
+                picture {
+                    max-width: 128px;
+                }
+            }
+
+            &--steel-lance {
+                picture {
+                    max-width: 154px;
+                }
+            }
+        }
+
+        &__bag {
+            flex: 1 1 100%;
+        }
+
+        &__bonus {
+            margin-top: 2em;
+            margin-bottom: 2em;
+        }
+
+        // this is to reduce font size and pack in more items
+        &--extra {
+            font-size: 1.1rem;
+            #{$select}__item {
+                flex-basis: 9em;
+                margin: 0;
+                align-self: center;
+                flex-grow: 0.7;
+            }
+        }
+    }
+
+    @media all and (min-width: $breakpoint) {
+        @include grid;
+    }
+}
+
+@mixin grid {
+    #{$select} {
+        &__group {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            flex-wrap: wrap;
+            @include group.gutter;
+        }
+
+        &__item {
+            &--turbo-nozzle {
+                flex: 0 0 8.5em;
+            }
+
+            &--detergent-foam-cannon {
+                flex: 0 0 8.5em;
+                justify-content: flex-end;
+            }
+
+            &--spray-tips {
+                flex: 0 0 9em;
+            }
+
+            &--hose {
+                flex: 0 0 11em;
+            }
+
+            &--power-cord {
+                flex: 0 0 11em;
+            }
+
+            &--steel-lance {
+                flex: 0 0 13em;
+            }
+        }
+
+        &__nav {
+            display: none;
+        }
+    }
+}

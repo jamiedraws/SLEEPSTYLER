@@ -1,0 +1,20 @@
+@use "../themes/colors";
+
+$select: ".square" !default;
+
+@mixin new($size: 2em, $scale: 1em) {
+	#{$select} {
+		width: $size;
+		height: $size;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-transform: uppercase;
+		background: colors.$first;
+		color: white;
+		font-size: $scale;
+		font-weight: bold;
+
+		@content;
+	}
+}

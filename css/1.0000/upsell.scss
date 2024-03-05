@@ -1,0 +1,18 @@
+@use "../interfaces/ui-page";
+@use "../interfaces/ui-upsell";
+@use "../interfaces/ui-checkout";
+@use "../models/colors";
+
+#orderItemsPlaceholder {
+    tfoot {
+        tr:nth-last-child(-n+2) td:not([rowspan="4"]) {
+            background: #e5f9ff;
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+	.nav--banner {
+		padding: .75em;
+	}
+}

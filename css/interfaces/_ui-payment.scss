@@ -1,0 +1,178 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../../Shared/css/template/dtm/utils/tailspin";
+@use "../models/colors";
+@use "../models/fonts";
+
+.view--main {
+    position: relative;
+}
+
+.form {
+    &__group {
+        flex: 1 1 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    &__item {
+        flex: 1 1 24em;
+        margin: 1em;
+    }
+
+    &__accept-offer {
+        flex: 1 1 100%;
+        border-top: 1px solid #ccc;
+        padding-top: 2em;
+    }
+
+    &__in {
+        position: sticky;
+        top: 0;
+    }
+
+    &__fieldset {
+        margin-bottom: 2em;
+    }
+
+    &__vse {
+        flex: 1 1 100%;
+    }
+
+    &__legend {
+        @include fonts.second(1.5em) {
+            font-weight: 500;
+            margin-bottom: .5em;
+        };
+    }
+
+    &__field {
+        display: flex;
+        flex-wrap: wrap;
+
+        [class*="o-grid"] {
+            display: block;
+            margin: 0.25em;
+        }
+    }
+
+    &__label {
+        display: block;
+        flex: 1 1 100%;
+        margin: 0.25em;
+    }
+
+    &__select,
+    &__input {
+        flex: 1;
+        margin: 0.25em;
+    }
+
+    &__link {
+        flex: 1;
+        margin: 0;
+    }
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    margin: auto;
+    background: white;
+    transition: opacity .2s ease-in-out;
+
+    &.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+
+        &__animation {
+            animation-play-state: paused;
+        }
+    }
+
+    &__animation {
+        font-size: 5rem;
+        @include tailspin.svg-tailspin(
+            (
+                fill: colors.get(first),
+                stroke: colors.get(first)
+            )
+        );
+        animation-play-state: running;
+    } 
+}
+
+@include scope.for-template {
+    .checkout-option {
+        text-align: left;
+    }
+}
+
+@include scope.for-mobile {
+    .form {
+        padding: 1rem 0;
+
+        &__loader {
+            align-items: flex-start;
+        }
+    }
+}
+
+@include scope.for-desktop {
+    .form {
+        padding: 1em;
+        min-height: 35em;
+
+        &__item {
+            padding: 1em;
+            flex: 0 1 24em;
+        }
+
+        &__divide {
+            &::before {
+                margin-right: 2rem;
+            }
+        }
+
+        &__divide {
+            position: relative;
+            display: flex;
+    
+            &::before {
+                content: "";
+                width: 1px;
+                height: 100%;
+                background: #ccc;
+                top: 0;
+                display: inline-block;
+            }
+    
+            &--group {
+                flex: 1;
+            }
+        }
+    }
+
+    #paypal-button {
+        max-width: 50%;
+        margin: auto;
+    }
+}
+
+@mixin hideCheckout {
+    opacity: 0;
+    transform: translateX(10%);
+    transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+}
+
+@mixin showCheckout {
+    opacity: 1;
+    transform: translateX(0);
+} 

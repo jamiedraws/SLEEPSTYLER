@@ -1,0 +1,53 @@
+/**
+* @prettier
+*/
+
+$select: ".article" !default;
+
+@use "../components/list";
+@use "../layouts/group";
+
+@mixin new {
+	#{$select} {
+		margin-top: 4rem;
+		margin-bottom: 4rem;
+
+		* + * {
+			margin-top: 2rem;
+		}
+
+		h2 {
+			text-transform: initial;
+		}
+
+		ul {
+			@include list.bullet;
+		}
+
+		@content;
+	}
+}
+
+@mixin image-text {
+	#{$select} {
+		&--image-text {
+			picture {
+				flex: 0 1 90px;
+			}
+
+			#{$select} {
+				&__group {
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: space-around;
+					align-items: flex-start;
+					@include group.gutter(1rem);
+				}
+
+				&__copy {
+					flex: 1 1 500px;
+				}
+			}
+		}
+	}
+}

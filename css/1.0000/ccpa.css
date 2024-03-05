@@ -1,0 +1,31 @@
+table {
+  display: table;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+}
+table th {
+  font-weight: bold;
+}
+table tr {
+  display: table-row;
+}
+table td,
+table th {
+  border: 1px solid #ccc;
+  padding: 1em;
+}
+
+.dtm__in--mv .data-table {
+  overflow-x: auto;
+  box-shadow: inset 0 0 1em white, inset 1em 1em 1em white, inset -0.5em 0 1.5em rgba(0, 0, 0, 0.25);
+}
+.dtm__in--mv .data-table table {
+  overflow: scroll;
+  min-width: 50em;
+}
+
+/*# sourceMappingURL=ccpa.css.map */

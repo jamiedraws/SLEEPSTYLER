@@ -1,0 +1,199 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../../Shared/css/template/dtm/components/product-card" as card;
+@use "../../Shared/css/template/dtm/components/cart";
+@use "../../Shared/css/template/dtm/components/option";
+@use "../models/colors";
+@use "../models/fonts";
+
+@include scope.for-template {
+    .button {
+        &--cart {
+            position: fixed;
+            bottom: 1em;
+            right: 1em;
+            z-index: 10;
+            box-shadow: 0 0 0.5em rgba(0,0,0,.6);
+            transition: opacity .3s ease-in-out;
+            opacity: 1;
+
+            > span {
+                display: flex;
+                align-items: center;
+
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    width: 1.5em;
+                    height: 1.25em;
+                    background: url(/shared/images/order-progress/cart.svg) no-repeat;
+                    margin-right: .25em;
+                    position: relative;
+                    z-index: 1;
+                }
+            }
+        }
+    
+        &--is-hidden {
+            opacity: 0;
+        }
+    }
+}
+
+@include scope.for-mobile {
+    .button {
+        &--cart {
+            display: none;
+        }
+    }
+}
+
+$card: ".card";
+@include card.model($card) {
+    @include fonts.second(1em, 1.45);
+
+    h2 {
+        @include fonts.first(2em);
+        color: colors.get(second);
+    }
+
+    .button {
+        &.is-selected {
+            pointer-events: none;
+            &::before,
+            &::after {
+                background: #999999;
+            }
+        }
+    }
+
+    &__disclaimer {
+        display: block;
+        font-weight: 500;
+        color: colors.get(third);
+        margin-top: 0.5em;
+    }
+};
+
+@include scope.for-mobile {
+    .card {
+        &--contain {
+            margin-left: 1px;
+            margin-right: 1px;
+        }
+
+        &__media {
+            flex-basis: 17em;
+        }
+    }
+}
+
+@include scope.for-portrait {
+    .card {
+        justify-content: center;
+
+        &--cart {
+            font-size: 3.25vw;
+            
+            .card__order {
+                text-align: center;
+            }
+        }
+    }
+
+    .card--mini .card__copy {
+        flex: 1;
+    }
+
+    .card--contain:not(.card--mini) .card__cart {
+        margin-right: 0;
+    }
+}
+
+@include scope.for-landscape {
+    .card--mini {
+        .card--cart {
+            font-size: .85em;
+        }
+    }
+}
+
+@include card.contain($card);
+@include card.cart($card);
+@include card.mini($card);
+
+@include cart.model;
+
+@include option.model;
+@include option.optin;
+
+@include scope.for-mobile {
+    .option {
+        font-size: 1.2rem;
+        margin: 1rem 0;
+
+        &__text {
+            text-align: left;
+
+            em {
+                display: block;
+                font-size: 1.3em;
+            }   
+        }
+    }
+}
+
+.c-brand {
+    &--item {
+        &__group {
+            text-align: center;
+        }
+
+        &__img {
+            border: 1px solid #ccc;
+            margin: auto;
+        }
+
+        &__text {
+            display: block;
+            margin-top: 0.5em;
+        }
+    }
+}
+
+.dtm {
+    @include scope.for-mobile {
+        .c-brand {
+            &--item {
+                display: flex;
+                justify-content: flex-end;
+                padding-left: 1rem;
+
+                &::before {
+                    display: none;
+                }
+
+                &__group {
+                    display: flex;
+                    align-items: center;
+                    flex: 1;
+                    justify-content: flex-start;
+                }
+
+                &__img {
+                    margin: 0;
+                }
+
+                &__text {
+                    margin-left: 1em;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
+
+.affirm {
+    &__video {
+        display: none;
+    }
+}

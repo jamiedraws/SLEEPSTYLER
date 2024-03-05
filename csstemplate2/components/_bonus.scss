@@ -1,0 +1,24 @@
+@use "../themes/colors";
+@use "../themes/fonts";
+
+@use "../layouts/group";
+
+$select: ".bonus" !default;
+$breakpoint-mobile: 680px !default;
+
+@mixin new {
+    #{$select} {
+        &__group {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            text-align: center;
+            position: relative;
+
+            @include group.gutter(1rem);
+            margin-bottom: 1rem;
+        }
+
+        @content;
+    }
+}

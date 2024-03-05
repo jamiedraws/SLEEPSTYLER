@@ -1,0 +1,201 @@
+@use "../themes/colors";
+@use "../themes/fonts";
+@use "../layouts/queries";
+
+$select: ".package" !default;
+
+// abstracts
+@use "../../Shared/css/template/base/abstracts/position";
+
+@mixin new {
+    #{$select} {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        font: 12px/1 fonts.$third;
+        padding: 2em 1em;
+        border-radius: 0.5em;
+        border: 3px solid transparent;
+        position: relative;
+        background: white;
+        transition: border-color 0.3s, background 1s;
+
+        label {
+            cursor: pointer;
+        }
+
+        &__checkbox {
+            padding: 1em;
+        }
+
+        &__title,
+        &__subtitle {
+            text-transform: uppercase;
+        }
+
+        &__title {
+            font: normal 3em/1 fonts.$fourth;
+        }
+
+        &__subtitle {
+            font: 800 1.8em/1 fonts.$second;
+        }
+
+        &__label {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &--is-selected {
+            border-color: colors.$first;
+            background: transparent;
+        }
+
+        &__price-discount-of {
+            color: colors.$fourth;
+            text-decoration: line-through;
+        }
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            box-shadow: inset 0 0 1em colors.$first;
+        }
+
+        @media (max-width: queries.$lg) {
+            &__checkbox {
+                padding: 0 1em 0 0;
+            }
+            &__title,
+            &__subtitle {
+                // might need to use the font clamp on this one
+                font-size: 1.4em;
+                display: inline-block;
+            }
+        }
+
+        @media (min-width: queries.$md) {
+            &__copy {
+                min-width: 26em;
+                display: flex;
+                flex-wrap: wrap;
+                align-self: flex-start;
+                justify-content: flex-start;
+                flex-direction: column;
+            }
+
+            &__details {
+                margin: 1.6em 0;
+            }
+
+            &__bonuses {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: queries.$md) {
+            flex-wrap: wrap;
+            justify-content: center;
+            &__copy {
+                display: inline-block;
+                flex: 1;
+            }
+
+            &__bonuses {
+                flex: 1 1 100%;
+            }
+
+            &__details {
+                margin: 1em 0;
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin unavailable {
+    #{$select} {
+        &--unavailable {
+            position: relative;
+
+            &::before,
+            &::after {
+                @include position.center-absolute;
+                z-index: 2;
+            }
+
+            &::before {
+                content: "";
+                background: white;
+                opacity: 0.8;
+                pointer-events: none;
+            }
+
+            &::after {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                content: "Temporarily Unavailable";
+                text-transform: uppercase;
+                text-align: center;
+                padding: 1em;
+                font: 800 2em/1 futura-pt;
+                color: colors.$first;
+            }
+
+            #{$select} {
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin fall {
+    #{$select} {
+        &--fall {
+            flex-wrap: wrap;
+            padding-top: 7em;
+            background: none;
+
+            &::before {
+                content: "DELUXE FALL CLEANING PACKAGE";
+                text-align: center;
+                flex: 0 1 100%;
+                color: white;
+                background: #fe6701;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                padding: 0.3em;
+                font: normal 3em/1 futura-pt-bold;
+
+                @media all and (max-width: 700px) {
+                    font-size: 2.2em;
+                }
+            }
+
+            &::after {
+                content: "";
+                background-image: url(/images/holiday/fall-banner.jpg);
+                display: block;
+                width: 100%;
+                height: 100%;
+                opacity: 0.3;
+                background-size: auto 100%;
+            }
+
+            #{$select} {
+            }
+
+            @content;
+        }
+    }
+}

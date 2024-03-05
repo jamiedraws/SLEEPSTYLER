@@ -1,0 +1,61 @@
+/**
+* @prettier
+*/
+
+$select: ".cart-total" !default;
+$background-color: black !default;
+
+@mixin new {
+	#{$select} {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex: 0 1 auto;
+
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
+
+		&__icon,
+		&__qty {
+			margin: 0 0.5em;
+		}
+
+		&__icon {
+			width: 2em;
+			height: 2em;
+			flex: 0 0 2em;
+
+			path {
+				fill: black;
+			}
+		}
+
+		&__qty {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			padding: 0.2em 0.2em;
+			min-width: 2em;
+			height: 1.6em;
+			background: $background-color;
+			color: #fff;
+			border-radius: 0;
+			transform: skew(-10deg);
+			transition: transform 0.3s ease-in-out;
+			font-size: 1.8em;
+			flex: 0 0 auto;
+
+			&__text {
+				transform: skew(10deg);
+			}
+
+			&--is-empty {
+				transform: skew(40deg) scale(0);
+			}
+		}
+
+		@content;
+	}
+}

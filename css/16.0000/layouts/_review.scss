@@ -1,0 +1,146 @@
+$select: ".review" !default;
+$desktop: 1000px !default;
+$breakpoint: 240px !default;
+
+@use "../layouts/copy";
+
+@use "../themes/fonts";
+
+$gap: 2rem;
+
+@mixin new {
+    #{$select} {
+        &__slide {
+            margin: auto;
+            max-width: 900px;
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        &__in {
+            position: relative;
+        }
+
+        &__title {
+            font-size: 2.33em;
+            line-height: 1.4;
+        }
+
+        &__stars {
+            max-width: 250px;
+            margin-bottom: 1.5rem;
+        }
+
+        &__into {
+            margin: 0 -#{$gap};
+            max-width: 760px;
+            width: 100%;
+
+            @media all and (max-width: $breakpoint) {
+                display: block;
+            }
+
+            @media all and (min-width: $desktop) {
+                align-items: center;
+            }
+        }
+
+        &__group {
+            margin: 0;
+
+            @media all and (min-width: $breakpoint) {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: stretch;
+                flex: 1;
+            }
+        }
+
+        @media all and (max-width: $breakpoint) {
+            &__item {
+                display: block;
+            }
+        }
+
+        &__quote {
+            flex: 1 1 250px;
+            margin: #{$gap} 0;
+
+            @include copy.separate;
+        }
+
+        &__title {
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        &__product {
+            text-transform: capitalize;
+        }
+
+        @media all and (max-width: $desktop) {
+            &__nav {
+                order: -1;
+                height: auto;
+                flex: 0 1 10em;
+                margin: 0;
+
+                button {
+                    margin: 0.5rem;
+                    padding: 0.25em 0.5em;
+                    font-size: 1em;
+                    flex: 1;
+                }
+            }
+        }
+
+        @media all and (max-width: 800px) {
+            &__title {
+                font-size: 8vw;
+            }
+        }
+
+        @media all and (max-width: $breakpoint) {
+            & &__nav,
+            & &__thumbnails {
+                display: none;
+            }
+        }
+
+        footer {
+            font-weight: bold;
+        }
+
+        @content;
+    }
+}
+
+@mixin carousel {
+    #{$select} {
+        &--carousel {
+            #{$select} {
+                &__quote {
+                    text-align: center;
+
+                    @media all and (min-width: $breakpoint) {
+                        margin: #{$gap};
+                    }
+                }
+
+                &__stars {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+        }
+    }
+}
+
+@mixin list {
+    #{$select} {
+        &--list {
+        }
+    }
+}

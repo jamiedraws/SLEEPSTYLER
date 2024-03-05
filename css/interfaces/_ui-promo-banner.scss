@@ -1,0 +1,81 @@
+@use "../../Shared/css/template/dtm/components/banner";
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../models/colors";
+@use "../models/fonts";
+
+.deal {
+    &__discount {
+        background: colors.get(fourth);
+    }
+}
+
+@include scope.for-mobile {
+    .deal {
+        &__discount {
+            margin: 0 0 0.5em;
+        }
+    }
+}
+
+@include scope.for-portrait {
+    .deal {
+        &__banner {
+            font-size: 5.75vmin;
+        }
+
+        &__discount {
+            text {
+                font-size: 2.75em;
+            }
+        }
+    }
+}
+
+@include scope.for-landscape {
+    .deal {
+        &__banner {
+            font-size: 6vmin;
+        }
+
+        &__discount {
+            text {
+                font-size: 2.5em;
+            }
+        }
+    }
+}
+
+.nav {
+    &__promo {
+        flex: 1 1 100%;
+        text-align: center;
+
+        .banner {
+            margin: 0;
+        }
+    }
+}
+
+@keyframes display-promo-banner {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@include scope.for-desktop {
+    .nav {
+        &__promo {
+            display: none;
+            animation: display-promo-banner 0.3s ease-in-out forwards;
+        }
+
+        &--is-fixed {
+            .nav__promo {
+                display: block;
+            }
+        }
+    }
+}

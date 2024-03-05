@@ -1,0 +1,7 @@
+$select: ".card" !default;
+
+@mixin new {
+	#{select} {
+		@content;
+	}
+}

@@ -1,0 +1,124 @@
+$select: ".hero" !default;
+$bp-mobile: 600px !default;
+$bp-tablet: 900px !default;
+$bp-desktop: 1200px !default;
+
+@use "group";
+@use "copy";
+@use "../themes/colors";
+@use "../themes/fonts";
+
+@mixin new {
+    #{$select} {
+        @media all and (max-width: $bp-mobile) {
+            font-size: 0.75rem;
+            font-size: clamp(0.75rem, 2.5vw, 1.8rem);
+
+            & &__bg {
+                img {
+                    object-fit: contain;
+                    object-position: top;
+                }
+            }
+        }
+
+        @media all and (max-width: $bp-desktop) {
+            &__bg {
+                display: none;
+            }
+        }
+
+        @media all and (min-width: $bp-desktop) {
+            &__group {
+                margin-top: 1rem;
+            }
+        }
+
+        &__in {
+            padding-top: 0;
+            padding-bottom: 0;
+            box-sizing: content-box;
+        }
+
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        &__product {
+            flex: 0 1 330px;
+            align-self: center;
+            mix-blend-mode: multiply;
+        }
+
+        &__offer {
+            flex: 0 1 420px;
+            display: inline-flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            text-align: center;
+
+            @media all and (min-width: $bp-desktop) {
+                order: -1;
+            }
+
+            // .call-in-phone {
+            //     @include call-to-order(white, colors.get(second)) {
+            //         border: 2px solid colors.get(second);
+            //         border-radius: 0.5em;
+            //         margin: 0.5em 0;
+            //     }
+            // }
+        }
+
+        &__addons {
+            flex: 1 1 350px;
+            padding-bottom: 2rem;
+        }
+
+        &__order {
+            margin-top: 1em;
+        }
+
+        &__shipping {
+            text-transform: uppercase;
+            font: italic 4rem fonts.$fourth, sans-serif;
+            font-size: clamp(4rem, 13vw, 5.4rem);
+            margin-top: 0.25em;
+            word-break: break-word;
+
+            > span {
+                font-size: 1.4em;
+            }
+        }
+
+        &__picture {
+            z-index: 2;
+
+            picture {
+                max-width: 16em;
+                margin: auto;
+            }
+        }
+
+        &__savings {
+            max-width: 422px;
+        }
+
+        &__burst {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+            align-items: center;
+            width: 100%;
+
+            > picture {
+                margin: 0.5rem 1rem;
+                flex: 0 0 auto;
+            }
+        }
+    }
+}

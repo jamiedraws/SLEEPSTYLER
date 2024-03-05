@@ -1,0 +1,30 @@
+@use "ui-page" as page;
+@use "ui-deal" as deal;
+@use "ui-form" as form;
+@use "../models/colors";
+
+main:not(.hero) {
+    //min-height: 100vh;
+}
+
+.view:not(.nav) {
+    position: relative;
+}
+
+.copy {
+    h2 {
+        margin: 0.5em 0;
+    }
+
+    h3 + p {
+        margin-top: 0.5em;
+    }
+
+    picture:first-child {
+        margin: auto auto 1em;
+    }
+
+    &:not(:last-child) {
+        padding-bottom: 2em;
+    }
+}

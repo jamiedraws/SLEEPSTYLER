@@ -1,0 +1,468 @@
+@use "../../Shared/css/template/dtm/components/card";
+@use "../../Shared/css/template/dtm/components/expando";
+
+@use "../themes/colors";
+@use "../themes/fonts";
+@use "../themes/background";
+
+@use "../layouts/queries";
+@use "../layouts/document";
+@use "../layouts/section" with (
+    $container: queries.$xl
+);
+
+@use "../layouts/view" with (
+    $breakpoint: queries.$xl
+);
+@use "../layouts/offer-card";
+@use "../layouts/addons";
+@use "../layouts/group";
+@use "../layouts/copy";
+@use "../layouts/feature-card";
+@use "../layouts/slide" with (
+    $desktop: queries.$lg
+);
+@use "../layouts/review" with (
+    $desktop: queries.$lg
+);
+@use "../layouts/features" with (
+    $color-first: colors.$first,
+    $breakpoint: queries.$xl
+);
+@use "../layouts/position";
+@use "../layouts/media";
+@use "../layouts/hero" with (
+    $bp-mobile: queries.$hero
+);
+@use "../layouts/form" with (
+    $color-checkbox-foreground: white,
+    $color-checkbox-background: #16c60c
+);
+@use "../layouts/signup";
+@use "../layouts/article";
+
+@use "../templates/dtm";
+
+@use "../media/load-item";
+
+@use "../interfaces/header" with (
+    $breakpoint: queries.$xl
+);
+@use "../interfaces/footer";
+@use "../interfaces/toast";
+
+@use "../components/payment";
+@use "../components/icons";
+@use "../components/contain";
+@use "../components/title";
+@use "../components/figure";
+@use "../components/list";
+@use "../components/button" with (
+    $breakpoint: queries.$xl
+);
+@use "../components/banner" with (
+    $breakpoint: queries.$hero
+);
+@use "../components/bonus";
+@use "../components/offer";
+@use "../components/deal" with (
+    $breakpoint: queries.$hero
+);
+@use "../components/chart";
+@use "../components/form-title";
+@use "../components/packages";
+@use "../components/bonuses";
+@use "../components/affirm";
+@use "../components/offer-details";
+@use "../components/square";
+@use "../components/frame";
+@use "../components/link";
+
+@use "../../Shared/css/template/dtm/components/modal" with (
+    $color: colors.$second,
+    $background-color: rgba(195, 207, 33, 0.75)
+);
+
+@use "../utils/mask";
+@use "../utils/text";
+@use "../utils/defer";
+@use "../utils/delay-input";
+
+@use "../layouts/nav";
+
+// for the critical rendering path
+@mixin critical {
+    @include document.new;
+    @include view.new;
+    @include section.new;
+    @include section.space;
+    @include group.new;
+    @include icons.new;
+    @include defer.new;
+    @include delay-input.new;
+
+    @include header.new {
+        @media all and (max-width: queries.$xl) {
+            display: none;
+        }
+    }
+
+    @include header.nav;
+    @include offer.new;
+    @include offer.discount-from;
+    @include affirm.new;
+    @include deal.new;
+    @include deal.nav;
+    @include deal.navbar;
+    @include deal.navdrawer {
+        #{offer.$select} {
+            &__txt {
+                font-size: 3em;
+            }
+        }
+    }
+    @include deal.hero;
+    @include deal.affirm;
+    @include banner.new;
+    @include banner.countdown-discount;
+    // this would not compile, put in the header
+    //@include banner.fall;
+
+    @include title.new {
+        color: colors.$second;
+    }
+    @include title.main;
+
+    @include contain.new;
+
+    #{contain.$select} {
+        &--logo-sunjoe {
+            @include contain.ratio(310/160);
+        }
+
+        &--logo-xtream {
+            @include contain.ratio(622/162);
+        }
+    }
+
+    @include button.new;
+    @include button.order;
+    @include button.bigger;
+    @include button.hero;
+    @include text.new;
+
+    @include modal.new {
+        font-size: 2rem;
+        color: colors.$second;
+
+        &__button {
+            background: colors.$first;
+            color: white;
+        }
+    }
+
+    .sr-only {
+        position: absolute;
+        opacity: 0;
+    }
+
+    @content;
+}
+
+// defer rendering at the base level
+@mixin defer {
+    @include section.block;
+
+    @include load-item.new;
+
+    @include background.new;
+    @include background.light;
+    @include background.dark;
+    @include background.contrast;
+
+    @include copy.new;
+
+    @include footer.new;
+    @include list.new {
+        &--bullet {
+            @include list.bullet;
+        }
+    }
+    @include list.grid;
+
+    @include dtm.processing-order-popup;
+    @include dtm.unrender-pixels;
+
+    @content;
+}
+
+@mixin common {
+    #{contain.$select} {
+    }
+
+    @content;
+}
+
+// landing pages
+@mixin landing-page($common: true) {
+    @include defer;
+
+    @include view.zero-anchor-position(".view--remove-nav");
+
+    @include article.new;
+    @include article.image-text;
+    @include signup.base;
+
+    @include offer-card.new {
+        #{contain.$select} {
+            &--offer-card-picture {
+                @include contain.ratio(451/287);
+            }
+        }
+    }
+    @include offer-card.double-offer;
+    //@include offer-card.burst;
+
+    @include form.template;
+    @include form.new;
+    @include form.summary-review;
+    @include packages.new;
+    @include packages.unavailable;
+    @include bonuses.new {
+        #{contain.$select} {
+            &--brush-badge {
+                @include contain.ratio(300/296);
+            }
+            &--warranty {
+                @include contain.ratio(342/186);
+            }
+            &--shipping {
+                @include contain.ratio(191/122);
+            }
+        }
+    }
+    @include dtm.ofrt;
+    @include form-title.new;
+
+    @include toast.new;
+    @include toast.polite;
+
+    @include expando.new;
+
+    @include offer-details.new;
+    @include form.checkbox;
+    @include square.new;
+
+    @include chart.new;
+
+    @include list.disc;
+
+    #{contain.$select} {
+        &--square {
+            @include contain.ratio(1/1);
+        }
+
+        &--video {
+            @include contain.ratio(16/9) {
+                background: black;
+            }
+        }
+    }
+
+    @if $common {
+        @include common;
+    }
+
+    @content;
+}
+
+// home page
+@mixin index($critical: false) {
+    @if $critical {
+        @include background.image;
+        @include hero.new;
+        @include banner.offer;
+        @include slide.new;
+        @include slide.addons;
+        @include addons.new;
+
+        #{contain.$select} {
+            &--hero-product {
+                @include contain.ratio(288/555);
+                max-width: 19em;
+            }
+
+            &--hero-savings {
+                @include contain.ratio(300/43);
+                max-width: 422px;
+            }
+
+            &--badge-value {
+                @include contain.ratio(302/186);
+                max-height: 78px;
+                max-width: 137px;
+            }
+
+            &--warranty {
+                @include contain.ratio(342/186);
+                max-height: 78px;
+                max-width: 137px;
+            }
+
+            &--mbg {
+                @include contain.ratio(147/150);
+                max-width: 105px;
+            }
+
+            &--addon-turbo-nozzle {
+                @include contain.ratio(1/1);
+                max-width: 73px;
+            }
+
+            &--addon-detergent-foam-cannon {
+                @include contain.ratio(132/176);
+                max-width: 68px;
+            }
+
+            &--addon-spray-tips {
+                @include contain.ratio(136/178);
+                max-width: 68px;
+            }
+
+            &--addon-hose {
+                @include contain.ratio(220/182);
+                max-width: 110px;
+            }
+
+            &--addon-cleaning-bottle-pack {
+                @include contain.ratio(1/1);
+                max-width: 80px;
+            }
+
+            &--addon-power-cord {
+                @include contain.ratio(264/126);
+                max-width: 128px;
+            }
+
+            &--addon-gutter-lance {
+                @include contain.ratio(1/1);
+                max-width: 75px;
+            }
+
+            &--addon-steel-lance {
+                @include contain.ratio(340/152);
+                max-width: 154px;
+            }
+
+            &--bonus-badge {
+                @include contain.ratio(300/296);
+                max-width: 145px;
+            }
+        }
+
+        @include payment.new;
+
+        @include bonus.new;
+        @include common;
+        @include signup.base;
+    } @else {
+        @include landing-page(false);
+        @include media.new;
+        @include button.media;
+        @include features.new;
+        @include figure.new;
+        @include figure.fill;
+
+        #{contain.$select} {
+            &--diagram {
+                @include contain.ratio(330/664);
+                max-width: 330px;
+            }
+
+            &--xtream-arrow {
+                @include contain.ratio(1084/196);
+                max-width: 542px;
+            }
+
+            &--feature {
+                @include contain.ratio(392/388);
+            }
+
+            &--photobar {
+                max-width: 1500px;
+                margin: auto;
+
+                @media all and (min-width: 601px) {
+                    @include contain.ratio(1300/520);
+                }
+
+                @media all and (max-width: 600px) {
+                    @include contain.ratio(828/1028);
+                }
+            }
+
+            &--figure {
+                @include contain.ratio(433/323);
+                max-width: 433px;
+            }
+        }
+
+        @include slide.in-use;
+        @include background.brand;
+        @include mask.new;
+
+        .disclaimer {
+            display: block;
+            margin-top: 1rem;
+            font-size: 1.4rem;
+            width: 100%;
+        }
+
+        @include reviews;
+        @include review.carousel;
+
+        @content;
+    }
+}
+
+// frequently asked questions
+@mixin faq {
+    @include landing-page;
+    @include card.model(".card", colors.$first) {
+        &__copy {
+            @include copy.separate;
+        }
+    }
+    @content;
+}
+
+// reviews
+@mixin reviews {
+    @include review.new {
+        font: 2.2rem fonts.$first, sans-serif;
+    }
+
+    #{contain.$select} {
+        &--stars {
+            @include contain.ratio(250/40);
+        }
+    }
+}
+
+// dtm-template
+@mixin dtm-template {
+    @include defer;
+    @include dtm.new;
+    @include dtm.layout;
+    @include dtm.express-checkout;
+}
+
+// checkout
+@mixin checkout {
+    @include dtm-template;
+    @include form.template;
+    @include form.new;
+    @include link.new;
+    @include article.new;
+    @include header.end-page;
+}

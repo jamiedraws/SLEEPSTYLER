@@ -1,0 +1,15 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../layouts/view";
+@use "../models/queries";
+
+@include scope.for-desktop {
+    @include view.set-anchor-position(-168px) {
+        @media all and (max-width: queries.$nav) {
+            top: -114px;
+        }
+    };
+}
+
+@include scope.for-mobile {
+    @include view.set-anchor-position(-15.1vmax);
+}

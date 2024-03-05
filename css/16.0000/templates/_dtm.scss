@@ -1,0 +1,249 @@
+@use "Shared/css/template/dtm/utils/scope";
+
+@use "../templates/fancybox";
+
+@use "../themes/colors";
+@use "../themes/fonts";
+@use "../layouts/queries";
+
+@use "../components/affirm";
+
+$select: ".dtm" !default;
+$breakpoint-small: 240px !default;
+$breakpoint-mobile: 640px !default;
+$breakpoint-desktop: 1000px !default;
+
+@mixin new {
+    @include scope.for-template {
+        @include fancybox.new;
+        @include box;
+    }
+
+    @include scope.for-template(".dtm__in", "#dtm") {
+        @include summary-review(colors.$table-header-background, currentColor);
+    }
+
+    #{$select} {
+        &__in {
+            background: none;
+        }
+    }
+
+    @content;
+}
+
+@mixin layout {
+    .l-outer {
+        max-width: none;
+
+        & > &__in {
+            max-width: $breakpoint-desktop;
+            margin: auto;
+            box-shadow: none;
+            border: none;
+        }
+
+        @media all and (max-width: $breakpoint-small) {
+            padding: 0;
+        }
+    }
+
+    @content;
+}
+
+@mixin confirmation-table {
+    .c-brand {
+        .c-list {
+            &--horz {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            &__item {
+                flex: 1 1 200px;
+                display: block;
+            }
+        }
+    }
+}
+
+@mixin unrender-pixels {
+    .l-controls {
+        display: none;
+    }
+}
+
+@mixin box {
+    .c-brand {
+        &--box {
+            background: colors.$first;
+        }
+    }
+}
+
+@mixin summary-review($background-color: #4b4c4e, $font-color: white) {
+    .c-brand {
+        &--table {
+            th,
+            & .c-brand--table__th {
+                background: $background-color;
+                border-color: $background-color;
+                color: $font-color;
+            }
+
+            @media all and (max-width: $breakpoint-small) {
+                tbody {
+                    td {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        text-align: center;
+                        padding: 1em;
+
+                        &::before {
+                            display: block;
+                            flex: 1 1 100%;
+                            text-align: center;
+                            padding: 0;
+                            margin-bottom: 0.5em;
+                            position: relative;
+                            left: 0;
+                            right: 0;
+                            top: 0;
+                            bottom: 0;
+                            width: auto;
+                            height: auto;
+                            max-width: none;
+                            max-height: none;
+                        }
+                    }
+                }
+
+                tfoot {
+                    tr {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        text-align: center;
+                        border: 1px solid #ccc;
+                    }
+
+                    td {
+                        flex: 1 1 100%;
+                        width: auto;
+                        border: 0;
+                        text-align: center;
+                        padding: 0.5em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin ofrt {
+    .FormHeadlineL {
+        display: none;
+    }
+
+    @content;
+}
+
+@mixin review-table {
+    .reviewTable {
+        &__wrap {
+            padding: 1rem;
+            @media all and (max-width: $breakpoint-small) {
+                overflow: scroll;
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin form {
+    .c-brand--form {
+        contain: layout;
+
+        &,
+        [class*="c-brand"] {
+            font-family: fonts.$second, sans-serif;
+            font-size: 1.6rem;
+        }
+
+        &__fieldset {
+            margin: 0;
+        }
+
+        &__legend {
+            background: colors.$eighth;
+            color: colors.$second;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        & &__legend > &__headline,
+        & &__fieldset > &__headline {
+            font: 600 1.3em/1 fonts.$first, sans-serif;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        &__desc {
+            text-align: left;
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        @content;
+    }
+}
+
+@mixin processing-order-popup {
+    #facebox * {
+        text-transform: capitalize;
+    }
+}
+
+@mixin express-checkout {
+    #dtm #paypal-button,
+    #dtm .zoid-outlet,
+    #dtm .zoid-component-frame {
+        width: 100% !important;
+        max-width: 300px;
+    }
+
+    .c-brand--form {
+        .checkout-option {
+            text-align: left;
+            padding: 0 0 1rem;
+            overflow: visible;
+
+            .label {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                min-width: 0;
+            }
+
+            &__img {
+                margin: 0;
+            }
+        }
+
+        @include affirm.checkout;
+
+        @content;
+    }
+}
+
+@mixin eflex-checkmark {
+    .eflex-checkmark {
+        &__svg {
+            margin: 0;
+        }
+
+        @content;
+    }
+}

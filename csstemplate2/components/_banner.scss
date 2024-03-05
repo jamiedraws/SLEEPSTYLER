@@ -1,0 +1,208 @@
+@use "../../Shared/css/template/dtm/components/banner";
+@use "../layouts/queries";
+@use "../themes/fonts";
+@use "../themes/colors";
+
+$select: ".banner" !default;
+$breakpoint: 400px !default;
+
+@mixin new() {
+    @include banner.model($select) {
+        display: block;
+        font: 2.4rem/1.25 fonts.$fourth, sans-serif;
+        text-decoration: none;
+        padding: 0.25em;
+        margin: 1em 0;
+
+        &--top {
+            background: #00b3e7;
+            text-transform: uppercase;
+            margin: 0;
+        }
+    }
+}
+
+@mixin countdown-discount {
+    #{$select} {
+        &--countdown-discount {
+            background: #ff6600;
+            text-transform: uppercase;
+            font-size: 3.1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0.25em;
+
+            > small {
+                text-transform: capitalize;
+
+                > * {
+                    margin: 0.25rem;
+                }
+            }
+
+            @media all and (max-width: queries.$xl) {
+                flex-direction: column;
+                font-size: 1.6rem;
+                font-size: clamp(1.6rem, 4vw, 3.1rem);
+            }
+
+            [data-time-live="0"] {
+                display: none;
+            }
+
+            [data-time-live]::before {
+                content: attr(data-time-live);
+                margin-right: 0.5rem;
+            }
+
+            #{$select} {
+                &__message {
+                    margin: 0.25em 0.35em;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin countdown() {
+    #{$select}--countdown {
+        width: 100%;
+        padding: 0.5em;
+        margin: 0;
+        background: #138e56;
+        z-index: 0;
+        overflow: hidden;
+        > * {
+            position: relative;
+            display: block;
+            z-index: 1;
+        }
+        &::before,
+        &::after {
+            content: "";
+            background: url(/images/holiday/bg-trees.png) center center
+                no-repeat;
+            width: 453px;
+            height: 59px;
+            position: absolute;
+            top: 0;
+            margin: 0.7% 1%;
+            z-index: 0;
+        }
+        &::before {
+            left: 0;
+        }
+        &::after {
+            right: 0;
+        }
+        @media screen and (min-width: queries.$xxl) {
+            &::before,
+            &::after {
+                margin: 0.7% 4vw;
+            }
+        }
+        @media screen and (max-width: queries.$lg) {
+            &::before {
+                right: 0;
+                width: 100%;
+                background-repeat: repeat;
+            }
+            &::after {
+                display: none;
+            }
+        }
+        @media screen and (max-width: queries.$md) {
+            font-size: 1.8rem;
+            .own-line {
+                display: block;
+            }
+            .spacer {
+                display: none;
+            }
+        }
+    }
+}
+
+@mixin offer {
+    #{$select} {
+        &--offer {
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+
+            @media all and (max-width: $breakpoint) {
+                margin-top: 0;
+            }
+
+            #{$select} {
+                &__message {
+                    > span {
+                        @media all and (min-width: $breakpoint) {
+                            &:not(:last-child) {
+                                &::after {
+                                    content: "\02014";
+                                    margin-left: 0.25em;
+                                }
+                            }
+                        }
+
+                        @media all and (max-width: $breakpoint) {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin fall {
+    #{$select} {
+        &--fall {
+            background-color: #ff6600;
+            background-image: url(/images/holiday/fall-banner.jpg?v=2);
+            background-position: center center;
+            background-repeat: repeat-x;
+            background-size: auto 100%;
+
+            #{$select} {
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin xmas-low {
+    #{$select} {
+        &--xmas-low {
+            background-color: #b80b0c;
+            background-image: url(/images/holiday/bg-snowflake.jpg);
+            background-position: center center;
+            background-repeat: repeat-x;
+            background-size: auto 100%;
+
+            #{$select} {
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin low {
+    #{$select} {
+        &--low {
+            background-color: #ff6600;
+
+            #{$select} {
+            }
+
+            @content;
+        }
+    }
+}

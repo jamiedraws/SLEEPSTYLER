@@ -1,0 +1,76 @@
+@use "Shared/css/template/dtm/utils/text";
+@use "../themes/colors";
+@use "../themes/fonts";
+@use "../layouts/queries";
+@use "../components/contain";
+
+$select: ".title" !default;
+
+@mixin new {
+	#{$select} {
+		text-align: center;
+		font-family: fonts.$fourth, sans-serif;
+
+		&__picture {
+			margin: auto;
+		}
+
+		&__desc {
+			text-transform: capitalize;
+		}
+
+		&__italicize {
+			font-style: italic;
+		}
+
+		&__wrap > * {
+			display: block;
+		}
+
+		&__underline {
+			position: relative;
+			&::after {
+				content: "";
+				background-image: url(/images/underline.svg);
+				background-size: 100% auto;
+				width: 100%;
+				height: 18%;
+				position: absolute;
+				bottom: -10%;
+				left: 0; right: 0;
+			}
+		}
+
+		@content;
+	}
+}
+
+@mixin main {
+	#{$select} {
+		&--main {
+			small {
+				color: black;
+				text-transform: initial;
+			}
+		}
+	}
+}
+
+@mixin comparison {
+	#{$select} {
+		&--comparison {
+			span {
+				color: colors.$third;
+			}
+
+			#{$select} {
+				&__text {
+					font-size: 2.7em;
+					@media (max-width: queries.$md) {
+						font-size: 1.7em;
+					}
+				}
+			}
+		}
+	}
+}

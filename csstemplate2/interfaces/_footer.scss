@@ -1,0 +1,27 @@
+@use "../components/list";
+
+$select: ".footer" !default;
+
+@mixin new {
+    #{$select} {
+        font-size: 1.4rem;
+
+        &__logo {
+            margin: auto;
+            max-width: 150px;
+        }
+
+        @include list.links;
+
+        &__copyright {
+            text-align: center;
+            font-style: normal;
+        }
+
+        a:not(:focus):not(:hover) {
+            text-decoration: none;
+        }
+
+        @content;
+    }
+}

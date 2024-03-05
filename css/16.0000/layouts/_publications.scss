@@ -1,0 +1,44 @@
+$select: ".publications" !default;
+
+@use "../themes/fonts";
+
+@mixin base {
+    #{$select} {
+
+        text-align: center;
+        background: linear-gradient(to bottom, #dedede 0%, #fff 30%, #fff 100%);
+        padding: 2rem 0;
+        
+        &__title {
+            font-size: 1.8em;
+            font-family: fonts.$first;
+            font-weight: 500;
+            text-transform: none;
+        }
+
+        &__group {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            img {
+                margin: 1em;
+                // would need a background on direct parent element to get this to work
+                // &[src*=jpg] {
+                //     mix-blend-mode: multiply;
+                // }
+            }
+        }
+
+        @media all and (max-width: 1000px) {
+            &__group {
+                flex-wrap: wrap;
+                img {
+                    flex: 0 1 auto;
+                    margin: 0.5em 0;
+                }
+            }
+        }
+
+        @content;
+    }
+}

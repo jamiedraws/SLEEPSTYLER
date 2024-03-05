@@ -1,0 +1,69 @@
+@use "sass:map";
+@use "sass:math";
+
+$select: ".c-modal" !default;
+$colors: (
+    primary: #ff6600,
+    light: white
+);
+
+@use "../../Shared/css/template/base/media/contain";
+@use "../../Shared/css/template/dtm/components/button" as dtm-button;
+@use "../../Shared/css/template/base/components/button" as base-button;
+
+@mixin new {
+    #{$select} {
+        @content;
+    }
+}
+
+@mixin answer-combo-response {
+    #{$select} {
+        &--answer-combo-response {
+            #{$select} {
+                &__fieldset {
+                    max-width: 800px;
+                    width: 95vw;
+                }
+
+                &__link {
+                    display: block;
+                }
+
+                &__label {
+                    height: auto;
+                }
+
+                &__picture {
+                    @include contain.format {
+                        @include contain.ratio(math.div(800, 500));
+
+                        @media all and (max-width: 500px) {
+                            @include contain.ratio(math.div(430, 480));
+                        }
+                    }
+                }
+
+                &__callout {
+                    @include dtm-button.structure {
+                        border: 3px solid;
+                        @include base-button.color-map(
+                            map.get($colors, primary),
+                            map.get($colors, light)
+                        );
+                    }
+
+                    font-weight: normal;
+                    text-decoration: none;
+                }
+
+                &__nav {
+                    display: flex;
+                }
+            }
+            @content;
+        }
+    }
+}
+
+@include answer-combo-response();

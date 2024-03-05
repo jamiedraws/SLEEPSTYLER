@@ -1,0 +1,59 @@
+$select: ".reveal" !default;
+
+@mixin hide {
+    pointer-events: none;
+}
+
+@mixin show {
+    pointer-events: all;
+}
+
+@mixin new {
+    #{$select} {
+        position: relative;
+        overflow: hidden;
+        padding: 0.25em 0;
+
+        &__item {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        &__in {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+
+        &__overlay {
+            @include show;
+        }
+
+        &__underlay {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            display: flex;
+            align-items: center;
+
+//             @include hide;
+        }
+
+        &--is-visible {
+            #{$select} {
+                &__in {
+                    opacity: 1;
+                    transform: translate(0);
+                }
+
+                &__out {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+            }
+        }
+
+        @content;
+    }
+}

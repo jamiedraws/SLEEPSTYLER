@@ -1,0 +1,41 @@
+@use "../themes/fonts";
+@use "../themes/colors";
+@use "../layouts/queries";
+
+$select: ".form-title" !default;
+
+@mixin new {
+    #{$select} {
+        text-align: center;
+        padding: 3rem 2rem;
+        line-height: 1;
+        color: colors.$second;
+        border-top: 2px solid #dddddd;
+
+        @media all and (max-width: 600px) {
+            font-size: 0.9rem;
+        }
+
+        &--no-border {
+            border-top: none;
+        }
+
+        &__not-available {
+            font: normal 2.8em/1 fonts.$fourth, sans-serif;
+            display: block;
+            margin-bottom: 0.15em;
+        }
+
+        &__fill-out {
+            font-size: 1.6em;
+            font-weight: 400;
+            font-family: fonts.$first;
+            span {
+                color: colors.$third;
+                font-family: fonts.$fourth;
+            }
+        }
+
+        @content;
+    }
+}

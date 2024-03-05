@@ -1,0 +1,123 @@
+@use "../themes/colors";
+
+$select: ".bg" !default;
+
+@mixin contain {
+    picture,
+    [data-src-iframe] {
+        @content;
+    }
+}
+
+@mixin new {
+    #{$select} {
+        @content;
+    }
+}
+
+@mixin light {
+    #{$select} {
+        &--light {
+            @include contain {
+                background: whitesmoke;
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin dark {
+    #{$select} {
+        &--dark {
+            background: colors.$dark;
+            color: colors.$light;
+
+            @include contain {
+                background: gray;
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin contrast {
+    #{$select} {
+        &--contrast {
+            background: colors.$second;
+            color: colors.$light;
+
+            picture {
+                background: none;
+            }
+
+            ::selection {
+                background: colors.$light;
+                color: colors.$first;
+            }
+
+            a:focus,
+            button:focus,
+            [tabindex="0"]:focus {
+                outline-color: white;
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin image {
+    #{$select} {
+        &--image {
+            position: relative;
+
+            #{$select} {
+                &__image {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    z-index: -1;
+
+                    img {
+                        object-fit: cover;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin brand {
+    #{$select} {
+        &--brand {
+            background: colors.$third;
+            color: colors.$second;
+
+            picture {
+                background: none;
+            }
+
+            ::selection {
+                background: colors.$light;
+                color: colors.$first;
+            }
+
+            a:focus,
+            button:focus,
+            [tabindex="0"]:focus {
+                outline-color: white;
+            }
+
+            @content;
+        }
+    }
+}

@@ -1,0 +1,339 @@
+@use "../themes/colors";
+@use "../themes/fonts";
+
+@use "../layouts/group";
+@use "../layouts/copy";
+
+@use "../components/bonus";
+
+$select: ".offer-card" !default;
+$breakpoint: 600px;
+
+@mixin new {
+    #{$select} {
+        &__bold {
+            font-weight: bold;
+        }
+
+        font: 2rem/1 fonts.$third;
+
+        &__list-title {
+            text-decoration: underline;
+        }
+
+        @content;
+    }
+}
+
+@mixin burst {
+    #{$select} {
+        &__bursts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            @include group.gutter(1rem);
+
+            > * {
+                flex: 0 1 auto;
+            }
+
+            > figure {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            picture {
+                align-self: center;
+            }
+        }
+
+        &__bursts &__burst {
+            flex-basis: 5em;
+        }
+    }
+}
+
+@mixin item {
+    #{$select} {
+        &--item {
+            display: inline-flex;
+            flex-direction: column;
+            text-align: center;
+            border: 1px solid;
+            flex: 0 1 363px;
+
+            > * {
+                flex: 0 0 auto;
+            }
+        }
+
+        #{$select} {
+            &__group {
+                display: flex;
+                flex-direction: column;
+                flex: 1 1 auto;
+            }
+
+            &__in {
+                padding: 1rem;
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__fit {
+                @media all and (min-width: $breakpoint) {
+                    flex: 0 1 22em;
+                }
+            }
+
+            &__fill {
+                flex: 1 1 auto;
+            }
+
+            & &__push {
+                margin-top: auto;
+            }
+
+            &__bar {
+                padding: 1rem;
+                background: none;
+                appearance: none;
+                font: inherit;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            a {
+                position: relative;
+                z-index: 2;
+            }
+
+            &__tab {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                align-self: flex-start;
+                position: relative;
+                width: 100%;
+                flex: 0 1 auto;
+                text-align: left;
+
+                > span {
+                    flex: 1 1 auto;
+                }
+            }
+
+            &__icon {
+                position: relative;
+                top: 0;
+                right: 0;
+                font-size: 2em;
+                flex: 0 0 auto;
+            }
+
+            &__copy {
+                text-align: left;
+                margin: 2rem 0;
+                display: flex;
+                flex-direction: column;
+                flex: 1 1 auto;
+            }
+
+            h4 {
+                font-size: 1.25em;
+            }
+
+            ul {
+                font-size: 0.9em;
+                margin-top: 1rem;
+            }
+
+            &__bonus {
+                justify-content: flex-start;
+                align-items: flex-end;
+                margin-top: auto;
+
+                > picture {
+                    flex-basis: 5em;
+                }
+            }
+
+            &__price {
+                font-size: 12px;
+                text-align: center;
+                align-self: center;
+                width: 100%;
+
+                &-desc {
+                    max-width: 24rem;
+                    margin: auto;
+                }
+            }
+
+            hr {
+                margin: 1rem 0;
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin full {
+    #{$select} {
+        &--full {
+            flex: 1 1 100%;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            margin: 1rem;
+
+            #{$select} {
+                &__picture {
+                    flex: 0 1 360px;
+                }
+
+                &__bar {
+                    flex: 1 1 100%;
+                }
+
+                &__fill {
+                    flex: 1 1 350px;
+                }
+
+                &__fit {
+                    flex: 3 1 200px;
+                }
+
+                &__group {
+                    flex-direction: row;
+
+                    #{$select} {
+                        &__copy {
+                            flex: 1 1 100%;
+                        }
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin sold-out {
+    #{$select} {
+        // when an item is marked as sold out, gray out everything but the title
+        &--sold-out {
+            > * {
+                opacity: 0.5;
+            }
+
+            #{$select} {
+                &__bar {
+                    opacity: 1;
+                    background: #ff0000;
+                    flex: 0 1 auto;
+                    text-align: center;
+                    color: white;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin half {
+    #{$select} {
+        &--half {
+            flex: 1 1 500px;
+
+            #{$select} {
+                &__picture {
+                    flex: 1 1 27rem;
+                }
+
+                &__fit {
+                    @media all and (min-width: $breakpoint) {
+                        flex: 0 1 24em;
+                    }
+                }
+
+                &__fill {
+                    margin-top: auto;
+                }
+
+                &__list-bonus {
+                    justify-content: space-between;
+                }
+
+                &__list {
+                    flex: 1 1 20rem;
+
+                    #{$select} {
+                        &__copy {
+                            margin: 0;
+                        }
+                    }
+                }
+
+                &__bonus {
+                    flex: 1 1 30rem;
+                    justify-content: center;
+                }
+            }
+
+            > #{$select} {
+                &__group {
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-items: flex-start;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin double-offer {
+    #{$select} {
+        &--double-offer {
+            #{$select} {
+                &__group {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                    align-items: center;
+
+                    @include group.gutter(2rem);
+                    margin: 0;
+                }
+
+                &__title {
+                    font-size: 1.4em;
+                    line-height: 1;
+                    font-weight: 900;
+                    text-transform: uppercase;
+                    color: colors.$first;
+                    word-break: break-word;
+                }
+
+                &__form {
+                    flex: 1 1 100%;
+                }
+
+                &__pictures {
+                    flex: 0 1 526px;
+                }
+
+                &__copy {
+                    flex: 1 1 300px;
+                    @include copy.separate;
+                }
+            }
+        }
+    }
+}

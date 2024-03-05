@@ -1,0 +1,9 @@
+$select: ".mask" !default;
+
+@mixin new {
+	#{$select} {
+		overflow: hidden;
+
+		@content;
+	}
+}

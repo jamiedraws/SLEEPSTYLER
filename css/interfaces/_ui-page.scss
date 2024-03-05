@@ -1,0 +1,534 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/components/button";
+@use "../components/toast";
+@use "../components/close";
+@use "../components/reveal";
+@use "../models/colors";
+@use "../models/fonts";
+@use "../models/queries";
+@use "ui-header" as header;
+@use "ui-deal" as deal;
+@use "../layouts/view";
+
+$min-layout: 1200px;
+$max-layout: 1100px;
+
+body {
+    @supports (display: flex) {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@include scope.for-template {
+    background: white;
+
+    @include fonts.third(18px, 1.4) {
+        font-weight: 400;
+
+        @media all and (max-width: 500px) {
+            font-size: 16px;
+        }
+    }
+}
+
+p {
+    line-height: 1.45;
+    margin: 1em 0;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+h2 {
+    @include fonts.fourth(2.75em, 1);
+    color: colors.get(second);
+}
+
+h3 {
+    @include fonts.first(2.8em, 1);
+    color: colors.get(second);
+}
+
+ul,
+ol {
+    margin-left: 1.5em;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    width: auto;
+}
+
+iframe,
+picture {
+    display: block;
+}
+
+figure {
+    margin: 0;
+}
+
+@include arp.init;
+@include arp.defer;
+
+@include header.nav;
+
+@include scope.for-mobile {
+    .nav {
+        font-size: 1.25vmax;
+    }
+}
+
+.view {
+    background: white;
+
+    &__anchor {
+        position: absolute;
+    }
+
+    &__in {
+        max-width: #{$max-layout};
+        margin: auto;
+        padding: 3em 1em;
+    }
+
+    &--header {
+        z-index: 2;
+        background: linear-gradient(#eeeeee, white, #eeeeee);
+    }
+
+    &--header &__in {
+        padding: 2em 1em;
+        background: url(/images/chevrons.svg) no-repeat 28em 1em;
+    }
+
+    &--footer {
+        flex: 1 1 auto;
+        @include fonts.second(1.4rem, 1.45);
+        text-align: center;
+        color: colors.get(_white);
+        background: colors.get(second);
+        z-index: 1;
+
+        form {
+            display: none;
+        }
+    }
+
+    &__disclaimer {
+        padding: 1em;
+        border: 1px solid #ccc;
+        border-radius: 0.25em;
+        font-size: 1.5rem;
+        max-width: 52em;
+        margin: auto;
+
+        p:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}
+
+@include scope.for-desktop {
+    @include view.set-anchor-position() {
+        @media all and (max-width: queries.$nav) {
+            top: -44px;
+        }
+    };
+
+    .view {
+        &--form {
+            padding-bottom: 5em;
+
+            .view__in {
+                padding-top: 0;
+            }
+        }
+
+        @media all and (min-width: $min-layout) {
+            min-width: #{$min-layout};
+        }
+
+        @media all and (max-width: $max-layout) {
+            max-width: #{$max-layout};
+            width: 100%;
+        }
+    }
+}
+
+@include scope.for-mobile {
+    @include view.set-anchor-position(-7.1vmax);
+
+    .view {
+        &__in {
+            padding: 1em;
+        }
+
+        &--reviews {
+            .view__in {
+                padding: 3em 1em;
+            }
+        }
+    }
+}
+
+.dtm {
+    @include scope.for-mobile {
+        .view {
+            &--footer {
+                .c-list--nav {
+                    background: white;
+                    color: black;
+                    display: block;
+                    border-radius: 0.25em;
+                    overflow: hidden;
+                    padding: 0;
+                    text-align: left;
+
+                    li {
+                        padding: 0;
+                        border-bottom: 1px solid;
+                        border-right: none;
+                        border-color: #ccc;
+                        display: block;
+                    }
+
+                    a {
+                        padding: 1em;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        transition: background 0.3s ease-in-out;
+                        text-decoration: none;
+
+                        &::after {
+                            content: "\e919";
+                            font-family: "Icomoon";
+                            display: block;
+                        }
+
+                        &:hover,
+                        &:focus {
+                            background: #ededed;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include scope.for-template {
+    @include button.model {
+        & {
+            border-radius: 0.25em;
+            border: 0.1em solid colors.get(first);
+            background: colors.get(first);
+            padding: 0.5em 0.75em;
+            overflow: hidden;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            @include fonts.fourth(1.6em, 0.9) {
+                text-transform: uppercase;
+            }
+        }
+
+        &::before {
+            background: colors.get(first);
+        }
+
+        &::after {
+            background: white;
+            transform: skew(45deg) scaleX(0);
+            transform-origin: left bottom;
+            transition: transform 0.4s ease-out;
+            opacity: 1;
+        }
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: colors.get(first);
+        }
+
+        &--brand-primary {
+            color: colors.get(second);
+            border-color: colors.get(second);
+            background: colors.get(third);
+
+            &::before {
+                background: colors.get(third);
+            }
+
+            &:hover,
+            &:focus {
+                color: currentColor;
+            }
+        }
+
+        &:hover,
+        &:focus {
+            &::after {
+                transform: skew(45deg) scaleX(2);
+            }
+        }
+    }
+}
+
+.copy {
+    p ~ h3 {
+        margin-top: 2em;
+    }
+
+    picture + h3 {
+        margin-top: 0.75em;
+    }
+
+    h3 {
+        color: colors.get(second);
+        @include fonts.fourth(1.75em, 1.3) {
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    }
+
+    &__cards {
+        display: block;
+        margin: 0;
+    }
+
+    .button {
+        font-size: 3rem;
+    }
+}
+
+@include scope.for-mobile {
+    .copy {
+        font-size: 4vmin;
+
+        h2 {
+            font-size: 7.5vmin;
+        }
+
+        .button {
+            font-size: 2.25rem;
+        }
+    }
+}
+
+.offer {
+    display: inline-block;
+    color: colors.get(second);
+    @include fonts.second(0.9em, 1);
+    position: relative;
+
+    &__txt {
+        text-transform: capitalize;
+        font-size: 1.8em;
+    }
+
+    &__price {
+        font-weight: 600;
+        font-size: 4em;
+        display: flex;
+        align-items: flex-start;
+        margin-top: -0.15em;
+    }
+
+    &__disclaimer {
+        line-height: 1;
+        text-transform: lowercase;
+        text-align: left;
+        display: block;
+        font-size: 0.25em;
+    }
+
+    &__follow {
+        text-align: left;
+        position: relative;
+        top: 0.2em;
+        left: 0.1em;
+    }
+
+    &__amt {
+        font-size: 2em;
+    }
+
+    &__currency,
+    &__cent {
+        font-size: inherit;
+    }
+
+    &__currency {
+        line-height: 1.4;
+    }
+
+    &__cent {
+        line-height: 1;
+        text-transform: none;
+    }
+}
+
+@include scope.for-template(".dtm__in", ".dtm") {
+    .fancybox-button--share {
+        display: none;
+    }
+
+    .fancybox-slide {
+        h1 {
+            font-size: 1.5em;
+        }
+
+        #policyContent,
+        .policy-body {
+            max-width: 1100px;
+        }
+    }
+}
+
+@include close.model(".toast");
+
+.toast {
+    @include toast.model;
+
+    &--hidden {
+        @include toast.hidden;
+
+        .toast__close {
+            &::before {
+                transition-delay: 0.35s;
+            }
+
+            &::after {
+                transition-delay: 0.7s;
+            }
+        }
+    }
+
+    &--alert {
+        position: fixed;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition-delay: 1s;
+    }
+
+    &__text {
+        margin-right: 1em;
+    }
+
+    &__close {
+        font-size: 0.45em;
+
+        &::before {
+            transition-delay: 1.35s;
+        }
+
+        &::after {
+            transition-delay: 1.7s;
+        }
+    }
+}
+
+@include scope.for-desktop {
+    .toast {
+        &--alert {
+            left: 1.5em;
+            bottom: 1.5em;
+        }
+    }
+}
+
+@include scope.for-mobile {
+    .toast {
+        &--alert {
+            right: 0;
+        }
+    }
+}
+
+@include arp.apply(".header__sunjoe", 310/160);
+@include arp.apply(".header__xtream", 622/162);
+@include arp.apply(".nav__sunjoe", 310/160);
+@include arp.apply(".nav__xtream", 622/162);
+
+@include arp.apply(".footer__logo", 300/149, 150px);
+
+.footer {
+    &__logo {
+        margin: auto auto 1em;
+    }
+}
+
+::selection {
+    background: colors.get(sixth);
+    color: white;
+}
+
+.affirm {
+    display: inline-flex;
+    flex-wrap: wrap;
+
+    > span {
+        flex: 1 1 100%;
+    }
+
+    > a {
+        padding: 0.25em;
+    }
+}
+
+@include scope.for-template(".dtm__in", ".dtm") {
+    .affirm {
+        &__logo-inline {
+            margin: -0.2em 0.2em -0.1em;
+        }
+
+        &__logo-inline,
+        &__logo-inline > img {
+            display: inline-block;
+            max-width: 3.75em;
+        }
+
+        .affirm__logo-inline > img {
+            border: none;
+        }
+    }
+}
+
+@include reveal.ui {
+    // this is to add padding for the countdown banner
+    .nav--banner .reveal {
+        padding: 1em 0;
+    }
+};
+@include deal.ui;
+@include scope.for-mobile {
+    .deal {
+        &--hero {
+            font-size: 0.5em;
+            flex: 1 1 100%;
+        }
+
+        &__banner {
+            margin-top: 0;
+        }
+
+        &--mini {
+            font-size: 0.4em;
+        }
+    }
+}
+@include deal.mini;

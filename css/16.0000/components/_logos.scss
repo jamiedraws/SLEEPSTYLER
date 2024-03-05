@@ -1,0 +1,80 @@
+$select: ".logos" !default;
+$breakpoint: 1000px !default;
+
+@use "../layouts/group";
+
+@mixin new {
+    #{$select} {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1 0 auto;
+        mix-blend-mode: multiply;
+
+        @include group.gutter;
+        margin: 0;
+
+        @content;
+    }
+}
+
+@mixin header {
+    #{$select} {
+        &--header {
+            @media all and (max-width: $breakpoint) {
+                justify-content: center;
+            }
+
+            #{$select} {
+                &__sunjoe {
+                    max-width: 155px;
+                    flex: 0 1 155px;
+                }
+
+                &__xtream {
+                    max-width: 311px;
+                    flex: 0 1 311px;
+                }
+
+                @media all and (max-width: $breakpoint) {
+                    &__sunjoe {
+                        max-width: 75px;
+                    }
+
+                    &__xtream {
+                        max-width: 111px;
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin nav {
+    #{$select} {
+        &--nav {
+            #{$select} {
+                &__sunjoe {
+                    max-width: 95px;
+                    max-width: 6.3em;
+                }
+
+                &__xtream {
+                    max-width: 160px;
+                    max-width: 10.5em;
+                }
+            }
+        }
+    }
+}
+
+@mixin navbar {
+    #{$select} {
+        &--navbar {
+            @media all and (min-width: $breakpoint) {
+                display: none;
+            }
+        }
+    }
+}

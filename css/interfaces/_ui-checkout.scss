@@ -1,0 +1,98 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../models/colors";
+
+$-view: ".view";
+
+#{$-view} {
+    &--checkout {
+        #{$-view}__in {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        #{$-view}__title {
+            margin-bottom: 1em;
+        }
+    }
+
+    &__title {
+        color: colors.get(fifth);
+        font-size: 2.3em;
+    }
+
+    &__title,
+    &__copy,
+    &__abbr {
+        text-align: center;
+    }
+
+    &__abbr {
+        display: block;
+        margin: 1em 0;
+
+        > abbr {
+            color: #9C0D0D;
+            margin-right: .25em;
+        }
+    }
+
+    &__copy {
+        strong {
+            display: block;
+            font-weight: bold;
+
+            > span {
+                color: colors.get(fourth);
+            }
+
+            + button {
+                margin-top: 1em;
+            }
+        }
+    }
+}
+
+@include scope.for-mobile {
+    font-size: 1.4rem;
+}
+
+.nav {
+    position: relative;
+}
+
+@include scope.for-template {
+    $c-phase: ".c-phase";
+
+    #{$c-phase} {
+        & #{$c-phase}__group {
+            margin: 3em 0 0;
+        }
+    }
+
+    .button--order {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    [data-edit-address-link] {
+        text-decoration: underline;
+    }
+}
+
+@include scope.for-template {
+    .l-outer {
+        max-width: none;
+
+        &__in {
+            max-width: 1100px;
+            margin: auto;
+            box-shadow: none;
+            border: none;
+        }
+    }
+}
+
+.hud {
+    display: none;
+}

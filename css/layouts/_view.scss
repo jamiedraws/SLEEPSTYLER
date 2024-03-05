@@ -1,0 +1,55 @@
+$select: ".view" !default;
+$breakpoint: 1000px !default;
+
+@mixin new {
+    @include set-anchor-position();
+
+    #{$select} {
+        position: relative;
+
+        &__anchor {
+            position: absolute;
+        }
+
+        @content;
+    }
+}
+
+@mixin set-anchor-position($static-amount: -65px) {
+    #{$select} {
+        &__anchor {
+            top: $static-amount;
+
+            @content;
+        }
+    }
+}
+
+@mixin zero-anchor-position($parent-select: $select) {
+    #{$parent-select} {
+        & > #{$select}__anchor {
+            top: 0;
+        }
+
+        @content;
+    }
+}
+
+@mixin set-position-context($parent-select: $select, $amount: 6rem) {
+    #{$parent-select} {
+        margin-top: -#{$amount};
+
+        #{$select} {
+            &__offset {
+                padding-top: $amount;
+            }
+
+            &__flow {
+                padding-top: $amount;
+                margin-bottom: -#{$amount};
+            }
+        }
+
+        @content;
+    }
+}

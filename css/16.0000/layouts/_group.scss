@@ -1,0 +1,88 @@
+$select: ".group" !default;
+
+@mixin gutter($gutter-contract: 0.5rem, $gutter-expand: $gutter-contract) {
+	margin: -#{$gutter-contract};
+
+	> * {
+		margin: #{$gutter-expand};
+	}
+}
+
+@mixin new($select: $select, $gutter: 0.5rem) {
+	#{$select} {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		overflow: hidden;
+
+		> * {
+			flex: 0 1 auto;
+		}
+
+		@include gutter($gutter);
+
+		@content;
+	}
+}
+
+@mixin two-column {
+	#{$select} {
+		&--2x-column {
+			align-items: flex-start;
+			@include gutter(2rem);
+
+			> * {
+				flex: 1 1 400px;
+				padding: 3px;
+			}
+
+			@content;
+		}
+	}
+}
+
+@mixin options {
+	#{$select} {
+		&--options {
+			@include gutter(0.25rem);
+
+			@content;
+		}
+	}
+}
+
+@mixin hero {
+	#{$select} {
+		&--hero {
+			align-items: center;
+
+			@media all and (min-width: 1000px) {
+				@include gutter(1rem);
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+
+			@content;
+		}
+	}
+}
+
+@mixin space-between {
+	#{$select} {
+		&--space-between {
+			justify-content: space-between;
+
+			@content;
+		}
+	}
+}
+
+@mixin row {
+	#{$select} {
+		&__row {
+			flex: 1 1 100%;
+		}
+
+		@content;
+	}
+}

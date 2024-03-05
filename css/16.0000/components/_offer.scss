@@ -1,0 +1,112 @@
+@use "../themes/fonts";
+@use "../themes/colors";
+
+$select: ".offer" !default;
+
+@mixin new {
+	#{$select} {
+		display: inline-block;
+		font-size: 1em;
+		font-weight: 600;
+		text-align: center;
+		line-height: 1;
+		position: relative;
+		color: #333333;
+
+		&__txt {
+			text-transform: capitalize;
+			font-size: 1.8em;
+			margin-bottom: 1.75rem;
+		}
+
+		&__price {
+			font-weight: 900;
+			font-size: 4em;
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
+			margin-top: -0.15em;
+			letter-spacing: -0.05em;
+		}
+
+		&__disclaimer {
+			line-height: 1;
+			text-align: left;
+			display: block;
+			font-size: 0.275em;
+			margin-top: 0.5em;
+			letter-spacing: 0;
+		}
+
+		&__follow {
+			text-align: left;
+			position: relative;
+			top: 0.2em;
+			left: 0.1em;
+			max-width: 2.1em;
+		}
+
+		&__amt {
+			font-size: 2em;
+		}
+
+		&__currency,
+		&__cent {
+			font-size: inherit;
+		}
+
+		&__currency {
+			line-height: 1.4;
+		}
+
+		&__cent {
+			line-height: 1;
+			text-transform: none;
+
+			> span + small {
+				margin-left: -0.25em;
+			}
+
+			> small {
+				display: inline-block;
+			}
+		}
+
+		&__slash {
+			letter-spacing: 0;
+		}
+
+		&--single-pay &__cent {
+			display: none;
+		}
+	}
+}
+
+@mixin strike-through {
+	position: relative;
+
+	&::after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 0.25em;
+		background: currentColor;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		transform-origin: center center;
+		transform: rotate(-15deg) scaleX(0.55) scaleY(2.5);
+		margin: auto;
+	}
+}
+
+@mixin discount-from {
+	#{$select} {
+		&--is-discount-from {
+			color: #747577;
+			font-size: 0.5em;
+			@include strike-through();
+		}
+	}
+}

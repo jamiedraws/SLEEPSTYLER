@@ -1,0 +1,8 @@
+@use "../layouts/view";
+@use "../components/banner";
+
+@include banner.new;
+@include banner.fall;
+@include banner.xmas-low;
+
+@include view.set-anchor-position(-13rem, -32vw);

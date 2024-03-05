@@ -1,0 +1,19 @@
+{
+  "name": "Sun Joe SPX3000 XTREAM",
+  "short_name": "Sun Joe",
+  "icons": [
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#C3CF21",
+  "background_color": "#C3CF21",
+  "display": "standalone"
+}

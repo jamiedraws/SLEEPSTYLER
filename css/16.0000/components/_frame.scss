@@ -1,0 +1,16 @@
+$select: ".frame" !default;
+
+@mixin new($color: black) {
+	#{$select} {
+		border: solid $color;
+		border-width: 3px 0;
+		padding: 3px 0;
+
+		&--all-edges {
+			border-width: 3px;
+			padding: 3px;
+		}
+
+		@content;
+	}
+}

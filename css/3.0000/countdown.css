@@ -1,0 +1,14 @@
+.dtm__in--dv .view__anchor {
+  top: -168px;
+}
+@media all and (max-width: 1100px) {
+  .dtm__in--dv .view__anchor {
+    top: -114px;
+  }
+}
+
+.dtm__in--mv .view__anchor {
+  top: -15.1vmax;
+}
+
+/*# sourceMappingURL=countdown.css.map */

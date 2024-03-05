@@ -1,0 +1,85 @@
+.banner {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 0.5em;
+  margin: 1em;
+  position: relative;
+  display: inline-block;
+  display: block;
+  font: 2.4rem/1.25 futura-pt-bold, sans-serif;
+  text-decoration: none;
+  padding: 0.25em;
+  margin: 1em 0;
+}
+.banner--ribbon {
+  line-height: 1;
+}
+.banner--ribbon::before, .banner--ribbon::after,
+.banner--ribbon > span::before,
+.banner--ribbon > span::after {
+  content: "";
+  position: absolute;
+  width: 1em;
+  border-style: solid;
+}
+.banner--ribbon::before,
+.banner--ribbon > span::before {
+  left: 0;
+  transform: translateX(-99%);
+}
+.banner--ribbon::after,
+.banner--ribbon > span::after {
+  right: 0;
+  transform: translateX(99%);
+}
+.banner--ribbon::before {
+  border-color: transparent black transparent transparent;
+  border-width: 1em 0.5em 0 0;
+  bottom: 0;
+}
+.banner--ribbon::after {
+  border-color: transparent transparent transparent black;
+  border-width: 1em 0 0 0.5em;
+  bottom: 0;
+}
+.banner--ribbon > span::before {
+  border-color: transparent black transparent transparent;
+  border-width: 0 0.5em 1em 0;
+  top: 0;
+}
+.banner--ribbon > span::after {
+  border-color: transparent transparent transparent black;
+  border-width: 0 0 1em 0.5em;
+  top: 0;
+}
+.banner--top {
+  background: #00b3e7;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.banner--fall {
+  background-color: #ff6600;
+  background-image: url(/images/holiday/fall-banner.jpg?v=2);
+  background-position: center center;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+}
+.banner--xmas-low {
+  background-color: #b80b0c;
+  background-image: url(/images/holiday/bg-snowflake.jpg);
+  background-position: center center;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+}
+.view__anchor {
+  top: -13rem;
+}
+@media all and (max-width: 1000px) {
+  .view__anchor {
+    top: -32vw;
+  }
+}
+
+/*# sourceMappingURL=countdown.css.map */
